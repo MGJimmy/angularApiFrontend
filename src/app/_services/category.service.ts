@@ -38,9 +38,20 @@ export class CategoryService {
                 }
               ));
   }
-
   deleteCategory(id:number):Observable<any>{
     return this._http.delete<any>(`${this._url}/${id}`).pipe(catchError((err)=>
+    {
+      return throwError(err.message ||"Internal Server error contact site adminstarator");
+    }));
+  }
+  getCategoriesCount():Observable<number>{
+    return this._http.get<number>(`${this._url}/count`).pipe(catchError((err)=>
+    {
+      return throwError(err.message ||"Internal Server error contact site adminstarator");
+    }));
+  }
+  getCategoriesByPage(pageSize:number, pageNumber:number):Observable<ICategory[]>{
+    return this._http.get<ICategory[]>(`${this._url}/${pageSize}/${pageNumber}`).pipe(catchError((err)=>
     {
       return throwError(err.message ||"Internal Server error contact site adminstarator");
     }));

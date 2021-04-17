@@ -15,6 +15,7 @@ import { DashboardSidebarComponent } from './components/dashboard/dashboard-side
 import { CategoriesComponent } from './components/dashboard/categories/categories.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './_helpers/auth.interceptor';
+import { ConfirmModalComponent } from './components/_reusableComponents/confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AuthInterceptor } from './_helpers/auth.interceptor';
     PageNotFoundComponent,
     DashboardSidebarComponent,
     CategoriesComponent,
-    LoginComponent
+    LoginComponent,
+    ConfirmModalComponent
   ],
   imports: [
     BrowserModule,

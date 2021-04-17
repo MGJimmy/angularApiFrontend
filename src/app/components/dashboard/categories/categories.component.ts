@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { ICategory } from 'src/app/_models/_interfaces/ICategory';
 import { CategoryService } from 'src/app/_services/category.service';
+import { ConfirmModalComponent } from '../../_reusableComponents/confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-categories',
@@ -11,14 +12,19 @@ import { CategoryService } from 'src/app/_services/category.service';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  @ViewChild('catModelCloseBtn') catModelCloseBtn;
-  allCategories:ICategory[];
+  @ViewChild('addOrUpdateModelCloseBtn') addOrUpdateModelCloseBtn;
+  @ViewChild(ConfirmModalComponent) confirmModal:ConfirmModalComponent;
+  private _categoryToUpdate:ICategory;
+  allCategories:ICategory[]; 
   errorMsg:string;
   categoryForm : FormGroup;
-  private _categoryToUpdate:ICategory;
   loading = false;
   submitted = false;
   actionName:string;
+  categoriesCount:number;
+  pageSize:number = 8;
+  currentPageNumber:number = 1;
+  numberOfPages:number; // categoriesCount / pageSize
 
   // convenience getter for easy access to form fields
   get formFields() { return this.categoryForm.controls; }
@@ -27,18 +33,21 @@ export class CategoriesComponent implements OnInit {
     private _router:Router) { }
 
   ngOnInit(): void {
-    this.categoryForm = this._formBuilder.group({
-      name:['', Validators.required]
-    });
-    this._categoryService.getAllCategories().subscribe(
+    this._categoryService.getCategoriesCount().subscribe(
       data => {
-        this.allCategories = data
+        this.categoriesCount = data
+        this.numberOfPages = Math.ceil(this.categoriesCount / this.pageSize)
       },
       error=>
       {
        this.errorMsg = error;
       }
     ) 
+    
+    this.categoryForm = this._formBuilder.group({
+      name:['', Validators.required]
+    });
+    this.getSelectedPage(1);
   }
 
   private onAddCategorySubmit() {
@@ -57,7 +66,7 @@ export class CategoriesComponent implements OnInit {
             data => {
                 this._router.routeReuseStrategy.shouldReuseRoute = () => false;
                 this._router.onSameUrlNavigation = 'reload';
-                this.catModelCloseBtn.nativeElement.click();
+                this.addOrUpdateModelCloseBtn.nativeElement.click();
                 this._router.navigate([this._router.url]);
             },
             error => {
@@ -83,7 +92,7 @@ export class CategoriesComponent implements OnInit {
             data => {
                 this._router.routeReuseStrategy.shouldReuseRoute = () => false;
                 this._router.onSameUrlNavigation = 'reload';
-                this.catModelCloseBtn.nativeElement.click();
+                this.addOrUpdateModelCloseBtn.nativeElement.click();
                 this._router.navigate([this._router.url]);
             },
             error => {
@@ -92,7 +101,7 @@ export class CategoriesComponent implements OnInit {
             });
   }
 
-  onSubmit(){
+  onAddOrUpdateSubmit(){
     if(this.actionName == "Add"){
       this.onAddCategorySubmit();
     }else{
@@ -120,21 +129,47 @@ export class CategoriesComponent implements OnInit {
                 this.loading = false;
             });
   }
+  openDeleteCategoryModal(categoryId){
+    //this._categoryToDeleteId = categoryId;
+    this.confirmModal.pointerToFunction = this._categoryService.deleteCategory
+    this.confirmModal.title = "Delete Category";
+    this.confirmModal.itemId = categoryId;
+    this.confirmModal.message = "Are you sure to delete this category";
+    this.confirmModal.pageUrl = this._router.url;
+    this.confirmModal.entityName ="category";
+  }
 
-  deleteCategory(categoryId){
-    this._categoryService.deleteCategory(categoryId)
-        .pipe(first())
-        .subscribe(
-            data => {
-              this._router.routeReuseStrategy.shouldReuseRoute = () => false;
-              this._router.onSameUrlNavigation = 'reload';
-              this.catModelCloseBtn.nativeElement.click();
-              this._router.navigate([this._router.url]);
-            },
-            error => {
-                this.errorMsg = error;
-                this.loading = false;
-            });
+  // deleteCategory(){
+  //   this._categoryService.deleteCategory(this._categoryToDeleteId)
+  //       .pipe(first())
+  //       .subscribe(
+  //           data => {
+  //             this._router.routeReuseStrategy.shouldReuseRoute = () => false;
+  //             this._router.onSameUrlNavigation = 'reload';
+  //             this.deleteModelCloseBtn.nativeElement.click();
+  //             this._router.navigate([this._router.url]);
+  //           },
+  //           error => {
+  //               this.errorMsg = error;
+  //               this.loading = false;
+  //           });
+  // }
+
+// pagination
+  counter(i: number) {
+    return new Array(i);
+  }
+  getSelectedPage(currentPageNumber:number){
+    this._categoryService.getCategoriesByPage(this.pageSize,currentPageNumber).subscribe(
+      data => {
+        this.allCategories = data
+        this.currentPageNumber = currentPageNumber;
+      },
+      error=>
+      {
+       this.errorMsg = error;
+      }
+    ) 
   }
 }
 
