@@ -13,7 +13,6 @@ import { CategoryService } from 'src/app/_services/category.service';
 export class CategoriesComponent implements OnInit {
   @ViewChild('catModelCloseBtn') catModelCloseBtn;
   allCategories:ICategory[];
-  newCategory:ICategory;
   errorMsg:string;
   categoryForm : FormGroup;
   private _categoryToUpdate:ICategory;
@@ -41,6 +40,7 @@ export class CategoriesComponent implements OnInit {
       }
     ) 
   }
+
   private onAddCategorySubmit() {
     this.submitted = true;
 
@@ -50,8 +50,8 @@ export class CategoriesComponent implements OnInit {
       }
 
     this.loading = true;
-    
-    this._categoryService.addNewCategory( this._categoryToUpdate)
+    let newCategory:ICategory = {id:0 , name : this.formFields.name.value};
+    this._categoryService.addNewCategory(newCategory)
         .pipe(first())
         .subscribe(
             data => {
@@ -65,6 +65,7 @@ export class CategoriesComponent implements OnInit {
                 this.loading = false;
             });
   }
+
   private onUpdateCategorySubmit(){
     this.submitted = true;
 
@@ -74,7 +75,8 @@ export class CategoriesComponent implements OnInit {
       }
 
     this.loading = true;
-    this.newCategory = {id : 0, name : this.formFields.name.value}
+    this._categoryToUpdate.name = this.formFields.name.value;
+    console.log(this._categoryToUpdate);
     this._categoryService.updateCategory(this._categoryToUpdate.id, this._categoryToUpdate)
         .pipe(first())
         .subscribe(
@@ -89,6 +91,7 @@ export class CategoriesComponent implements OnInit {
                 this.loading = false;
             });
   }
+
   onSubmit(){
     if(this.actionName == "Add"){
       this.onAddCategorySubmit();
@@ -97,12 +100,10 @@ export class CategoriesComponent implements OnInit {
     }
   }
  
-
-
-  
   openAddCategoryModal(){
     this.actionName = "Add";
   }
+
   openUpdateCategoryModal(categoryId){
     this.actionName = "Update";
     this._categoryService.getCategoryById(categoryId)
@@ -112,7 +113,23 @@ export class CategoriesComponent implements OnInit {
                 this.categoryForm.setValue({
                   name: data.name
                 }); 
-                this._categoryToUpdate = data
+                this._categoryToUpdate = data;
+            },
+            error => {
+                this.errorMsg = error;
+                this.loading = false;
+            });
+  }
+
+  deleteCategory(categoryId){
+    this._categoryService.deleteCategory(categoryId)
+        .pipe(first())
+        .subscribe(
+            data => {
+              this._router.routeReuseStrategy.shouldReuseRoute = () => false;
+              this._router.onSameUrlNavigation = 'reload';
+              this.catModelCloseBtn.nativeElement.click();
+              this._router.navigate([this._router.url]);
             },
             error => {
                 this.errorMsg = error;
@@ -121,13 +138,3 @@ export class CategoriesComponent implements OnInit {
   }
 }
 
-
-// this.registerForm.setValue({
-//      userName:'ITI',
-//      password:'123',
-//      confirmPassword:'123',
-//      address:{
-//        state:'USA',
-//        city:'OHIO',
-//        postalCode:'32146'
-//      })
