@@ -5,19 +5,22 @@ import { CategoriesComponent } from './components/dashboard/categories/categorie
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AuthGuard } from './_helpers/auth.guard';
 
 const routes: Routes = [
-  //{path:'',redirectTo:'/Departments',pathMatch:'full'},
+  {path:'',redirectTo:'/dashboard',pathMatch:'full'},
   {path:'login', component: LoginComponent},
   {
     path:'dashboard',
     component:DashboardComponent,
+    canActivate: [AuthGuard],
+    canActivateChild : [AuthGuard],
     children:[
       {path: "categories", component: CategoriesComponent}
     ]
   },
   {
-    path:'',
+    path:'client',
     component:ClientComponent,
     children:[]
   },

@@ -45,6 +45,14 @@ export class AuthenticationService {
         localStorage.removeItem("expires_at");
         this.router.navigate(['/login']);
     }
+    
+    public isLoggedIn() {
+        return localStorage.getItem('token') != null ? true : false;
+    }
+
+    isLoggedOut() {
+        return !this.isLoggedIn();
+    }
     /*          
     public isLoggedIn() {
         return moment().isBefore(this.getExpiration());

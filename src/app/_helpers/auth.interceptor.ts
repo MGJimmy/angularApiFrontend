@@ -18,11 +18,11 @@ export class AuthInterceptor implements HttpInterceptor {
         if (Token && isApiUrl) {
             request = request.clone({
                 setHeaders: { 
-                    Authorization: `Bearer ${Token}`
+                    Authorization: `Bearer ${Token}`                    
                 }
             });
         }
-
+        
         return next.handle(request);
     }
 }
