@@ -110,6 +110,7 @@ export class CategoriesComponent implements OnInit {
   }
  
   openAddCategoryModal(){
+    this.formFields.name.setValue("");
     this.actionName = "Add";
   }
 
@@ -136,7 +137,7 @@ export class CategoriesComponent implements OnInit {
     this.confirmModal.itemId = categoryId;
     this.confirmModal.message = "Are you sure to delete this category";
     this.confirmModal.pageUrl = this._router.url;
-    this.confirmModal.entityName ="category";
+    //this.confirmModal.entityName ="category";
   }
 
   // deleteCategory(){
