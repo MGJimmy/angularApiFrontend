@@ -19,6 +19,14 @@ export class RegisterService {
       return throwError(err.message || "Internal Server error contact site adminstarator");
     }));
   }
+
+  getUserById(id: string): Observable<IUser> {
+    let url = `${environment.apiUrl}/api/account/${id}`;
+    return this._http.get<IUser>(url).pipe(catchError((err) => {
+      return throwError(err.message || "Internal Server error contact site adminstarator");
+    }));
+  }
+
   addNewAdmin(newProduct: IUser): Observable<IUser> {
     let url = `${environment.apiUrl}/RegisterAdmin`;
     return this._http.post<IUser>(url, newProduct)
@@ -34,6 +42,22 @@ export class RegisterService {
         return throwError(err.message || "Internal Server error contact site adminstarator");
       }
       ));
+  }
+
+  updateUser(id: string, userToUpdate: IUser): Observable<IUser> {
+    let url = `${environment.apiUrl}/api/account`;
+    return this._http.put<IUser>(url, userToUpdate)
+      .pipe(catchError((err) => {
+        return throwError(err.message || "Internal Server error contact site adminstarator");
+      }
+      ));
+  }
+
+  deleteUser(id: string): Observable<any> {
+    let url = `${environment.apiUrl}/api/account/${id}`;
+    return this._http.delete<any>(url).pipe(catchError((err) => {
+      return throwError(err.message || "Internal Server error contact site adminstarator");
+    }));
   }
 
   getAccountsCount(): Observable<number> {

@@ -9,5 +9,5 @@ export interface IUser {
     firstName:string;
     lastName:string;
     // address:string;
-    //gender:string;
+    gender:string;
 }

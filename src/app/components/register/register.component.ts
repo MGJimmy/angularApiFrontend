@@ -51,7 +51,8 @@ export class RegisterComponent implements OnInit {
       passwordHash: this.formFields.password.value,
       email: this.formFields.email.value,
       firstName: this.formFields.firstName.value,
-      lastName: this.formFields.lastName.value
+      lastName: this.formFields.lastName.value,
+      gender: this.formFields.gender.value
     }
     this._registerService.addNewAdmin(newUser)
       .pipe(first())
