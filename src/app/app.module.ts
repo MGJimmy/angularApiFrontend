@@ -17,6 +17,8 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './_helpers/auth.interceptor';
 import { ConfirmModalComponent } from './components/_reusableComponents/confirm-modal/confirm-modal.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ProductsComponent } from './components/dashboard/products/products.component';
+import { UsersComponent } from './components/dashboard/users/users.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { RegisterComponent } from './components/register/register.component';
     CategoriesComponent,
     LoginComponent,
     ConfirmModalComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProductsComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
