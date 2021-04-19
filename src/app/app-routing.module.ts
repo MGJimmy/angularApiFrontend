@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ClientComponent } from './components/client/client.component';
 import { CategoriesComponent } from './components/dashboard/categories/categories.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ProductsComponent } from './components/dashboard/products/products.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AuthGuard } from './_helpers/auth.guard';
@@ -16,7 +17,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     canActivateChild : [AuthGuard],
     children:[
-      {path: "categories", component: CategoriesComponent}
+      {path: "categories", component: CategoriesComponent},
+      {path: "products", component: ProductsComponent}
     ]
   },
   {
