@@ -22,12 +22,9 @@ const routes: Routes = [
     canActivateChild : [AuthGuard],
     children:[
       {path: "categories", component: CategoriesComponent},
-<<<<<<< HEAD
       {path: "orders", component: OrderComponent},
-=======
       {path: "products", component: ProductsComponent},
       {path: "users", component: UsersComponent}
->>>>>>> 54065a261f8316c15622fff6e36d323e302c7cbe
     ]
   },
   {

@@ -34,13 +34,10 @@ import { UsersComponent } from './components/dashboard/users/users.component';
     CategoriesComponent,
     LoginComponent,
     ConfirmModalComponent,
-<<<<<<< HEAD
-    OrderComponent
-=======
+    OrderComponent,
     RegisterComponent,
     ProductsComponent,
     UsersComponent
->>>>>>> 54065a261f8316c15622fff6e36d323e302c7cbe
   ],
   imports: [
     BrowserModule,
