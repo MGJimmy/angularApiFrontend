@@ -16,6 +16,13 @@ export class DashboardSidebarComponent implements OnInit {
     this._router.navigate(['categories'],{relativeTo:this._activatedRoute});    
   }
   navigateToOrders():void{
-    this._router.navigate(['orders'],{relativeTo:this._activatedRoute});    
+
+    this._router.navigate(['orders'],{relativeTo:this._activatedRoute});  
+  }
+  navigateToProduct():void{
+    this._router.navigate(['products'],{relativeTo:this._activatedRoute});   
+  }
+  navigateToUser(): void {
+    this._router.navigate(['users'],{relativeTo:this._activatedRoute});   
   }
 }

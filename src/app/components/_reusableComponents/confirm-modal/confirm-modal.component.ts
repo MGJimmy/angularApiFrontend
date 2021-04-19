@@ -17,14 +17,11 @@ export class ConfirmModalComponent implements OnInit {
   itemId:any;  
   pageUrl;
   pointerToFunction:any;
-  entityName:string;
-  private _url;
   constructor(private _router:Router, private _http:HttpClient) { }
 
   ngOnInit(): void {
   }
   confirm(){
-    this._url  =  `${environment.apiUrl}/api/${this.entityName}`
     this.pointerToFunction(this.itemId)
     .pipe(first())
         .subscribe(
