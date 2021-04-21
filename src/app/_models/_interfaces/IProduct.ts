@@ -7,6 +7,5 @@ export interface IProduct {
   image:string,
   quantity:number,
   categoryId:number,
-  colorId:number
-
+  colorId:number,
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { Product } from 'src/app/_models/_classes/Product';
 import { IProduct } from 'src/app/_models/_interfaces/IProduct';
 import { ProductService } from 'src/app/_services/product.service';
 import { ConfirmModalComponent } from '../../_reusableComponents/confirm-modal/confirm-modal.component';
@@ -15,7 +16,7 @@ export class ProductsComponent implements OnInit {
   @ViewChild('addOrUpdateModelCloseBtn') addOrUpdateModelCloseBtn;
   @ViewChild(ConfirmModalComponent) confirmModal:ConfirmModalComponent;
   private _ProductToUpdate:IProduct;
-  allProducts:IProduct[]; 
+  allProducts:Product[]; 
   errorMsg:string;
   productForm : FormGroup;
   loading = false;
@@ -75,7 +76,7 @@ export class ProductsComponent implements OnInit {
       image: this.formFields.image.value,
       quantity: this.formFields.quantity.value,
       categoryId: this.formFields.categoryId.value,
-      colorId: this.formFields.colorId.value
+      colorId: this.formFields.colorId.value,
     };
     this._productService.addNewProduct(newProduct)
         .pipe(first())

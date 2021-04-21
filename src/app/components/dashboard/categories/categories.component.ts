@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { ICategory } from 'src/app/_models/_interfaces/ICategory';
 import { CategoryService } from 'src/app/_services/category.service';
+import { environment } from 'src/environments/environment';
 import { ConfirmModalComponent } from '../../_reusableComponents/confirm-modal/confirm-modal.component';
 
 @Component({
@@ -25,6 +26,7 @@ export class CategoriesComponent implements OnInit {
   pageSize:number = 8;
   currentPageNumber:number = 1;
   numberOfPages:number; // categoriesCount / pageSize
+  public response: {dbPath: ''};
 
   // convenience getter for easy access to form fields
   get formFields() { return this.categoryForm.controls; }
@@ -59,7 +61,12 @@ export class CategoriesComponent implements OnInit {
       }
 
     this.loading = true;
-    let newCategory:ICategory = {id:0 , name : this.formFields.name.value};
+    let newCategory:ICategory = 
+    {
+      id:0 ,
+      name : this.formFields.name.value,
+      image : this.response.dbPath,
+    };
     this._categoryService.addNewCategory(newCategory)
         .pipe(first())
         .subscribe(
@@ -85,6 +92,9 @@ export class CategoriesComponent implements OnInit {
 
     this.loading = true;
     this._categoryToUpdate.name = this.formFields.name.value;
+    if(this.response.dbPath != ''){ // if the user doesn't change the image 
+      this._categoryToUpdate.image = this.response.dbPath;
+    }
     console.log(this._categoryToUpdate);
     this._categoryService.updateCategory(this._categoryToUpdate.id, this._categoryToUpdate)
         .pipe(first())
@@ -140,22 +150,6 @@ export class CategoriesComponent implements OnInit {
     //this.confirmModal.entityName ="category";
   }
 
-  // deleteCategory(){
-  //   this._categoryService.deleteCategory(this._categoryToDeleteId)
-  //       .pipe(first())
-  //       .subscribe(
-  //           data => {
-  //             this._router.routeReuseStrategy.shouldReuseRoute = () => false;
-  //             this._router.onSameUrlNavigation = 'reload';
-  //             this.deleteModelCloseBtn.nativeElement.click();
-  //             this._router.navigate([this._router.url]);
-  //           },
-  //           error => {
-  //               this.errorMsg = error;
-  //               this.loading = false;
-  //           });
-  // }
-
 // pagination
   counter(i: number) {
     return new Array(i);
@@ -171,6 +165,13 @@ export class CategoriesComponent implements OnInit {
        this.errorMsg = error;
       }
     ) 
+  }
+
+  public uploadFinished = (event) => { 
+    this.response = event;
+  }
+  public createImgPath = (serverPath: string) => {
+    return `${environment.apiUrl}/${serverPath}`;
   }
 }
 

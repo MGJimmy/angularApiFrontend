@@ -20,6 +20,7 @@ import { OrderComponent } from './components/dashboard/order/order.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProductsComponent } from './components/dashboard/products/products.component';
 import { UsersComponent } from './components/dashboard/users/users.component';
+import { UploadComponent } from './components/_reusableComponents/upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { UsersComponent } from './components/dashboard/users/users.component';
     OrderComponent,
     RegisterComponent,
     ProductsComponent,
-    UsersComponent
+    UsersComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,

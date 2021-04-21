@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Product } from '../_models/_classes/Product';
 import { IProduct } from '../_models/_interfaces/IProduct';
 
 @Injectable({
@@ -52,9 +53,9 @@ export class ProductService {
       return throwError(err.message || "Internal Server error contact site adminstarator");
     }));
   }
-  getProductsByPage(pageSize: number, pageNumber: number): Observable<IProduct[]> {
+  getProductsByPage(pageSize: number, pageNumber: number): Observable<Product[]> {
     let url = `${environment.apiUrl}/api/product/${pageSize}/${pageNumber}`;
-    return this._http.get<IProduct[]>(url).pipe(catchError((err) => {
+    return this._http.get<Product[]>(url).pipe(catchError((err) => {
       return throwError(err.message || "Internal Server error contact site adminstarator");
     }));
   }

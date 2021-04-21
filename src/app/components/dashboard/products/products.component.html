@@ -24,10 +24,11 @@
             <td>{{ product.name }}</td>
             <td>{{ product.price }}</td>
             <td>{{ product.description }}</td>
-            <td>{{ product.discount |percent }}</td>
+            <td>{{ product.discount }}%</td>
             <td>{{ product.image }}</td>
-            <td>{{ product.categoryId }}</td>
-            <td>{{ product.colorId }}</td>
+            <td>{{ product.quantity }}</td>
+            <td>{{ product.categoryName }}</td>
+            <td>{{ product.colorName }}</td>
             <td>
                 <button class="btn btn-success mx-2" data-toggle="modal" data-target="#addAndUpdateModel" (click)="openUpdateProductModal(product.id)">Update</button>
                 <button class="btn btn-danger mx-2" (click)="openDeleteProductModal(product.id)" data-toggle="modal" data-target="#deleteModel">Delete</button>
