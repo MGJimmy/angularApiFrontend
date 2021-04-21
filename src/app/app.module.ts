@@ -22,6 +22,7 @@ import { ProductsComponent } from './components/dashboard/products/products.comp
 import { UsersComponent } from './components/dashboard/users/users.component';
 import { UploadComponent } from './components/_reusableComponents/upload/upload.component';
 import { HomeComponent } from './components/client/home/home.component';
+import { ColorsComponent } from './components/dashboard/colors/colors.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { HomeComponent } from './components/client/home/home.component';
     ProductsComponent,
     UsersComponent,
     UploadComponent,
-    HomeComponent
+    HomeComponent,
+    ColorsComponent
   ],
   imports: [
     BrowserModule,
