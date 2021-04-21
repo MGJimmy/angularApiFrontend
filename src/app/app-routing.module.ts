@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClientComponent } from './components/client/client.component';
+import { HomeComponent } from './components/client/home/home.component';
 import { CategoriesComponent } from './components/dashboard/categories/categories.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { OrderComponent } from './components/dashboard/order/order.component';
@@ -12,7 +13,6 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './_helpers/auth.guard';
 
 const routes: Routes = [
-  {path:'',redirectTo:'/dashboard',pathMatch:'full'},
   {path:'login', component: LoginComponent},
   {path:'register', component: RegisterComponent},
   {
@@ -21,18 +21,20 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     canActivateChild : [AuthGuard],
     children:[
-      {path: "categories", component: CategoriesComponent},
-      {path: "orders", component: OrderComponent},
-      {path: "products", component: ProductsComponent},
-      {path: "users", component: UsersComponent}
+      {path: 'categories', component: CategoriesComponent},
+      {path: 'orders', component: OrderComponent},
+      {path: 'products', component: ProductsComponent},
+      {path: 'users', component: UsersComponent}
     ]
   },
   {
-    path:'client',
+    path:'', 
     component:ClientComponent,
-    children:[]
+    children:[
+      {path: '', component: HomeComponent}
+    ]
   },
-  {path: "**", component: PageNotFoundComponent}
+  {path: '**', component: PageNotFoundComponent}
  
 ];
 

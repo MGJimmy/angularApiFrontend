@@ -25,7 +25,9 @@
             <td>{{ product.price }}</td>
             <td>{{ product.description }}</td>
             <td>{{ product.discount }}%</td>
-            <td>{{ product.image }}</td>
+            <td>
+                <img class="img-thumbnail img-fluid" [src]="createImgPath(product.image)" alt="category image">
+            </td>
             <td>{{ product.quantity }}</td>
             <td>{{ product.categoryName }}</td>
             <td>{{ product.colorName }}</td>
@@ -67,18 +69,32 @@
                 <div class="modal-body">
                     <div class="form-group my-3">
                         <input formControlName="name" type="text" class="form-control" placeholder="Name" name="name" [class.is-invalid]="formFields.name?.invalid && formFields.name?.touched">
+                    </div>
+                    <div class="form-group my-3">
                         <input formControlName="price" type="text" class="form-control" placeholder="price" name="price" [class.is-invalid]="formFields.price?.invalid && formFields.price?.touched">
+                    </div>
+                    <div class="form-group my-3">
                         <input formControlName="description" type="text" class="form-control" placeholder="description" name="description" [class.is-invalid]="formFields.description?.invalid && formFields.description?.touched">
+                    </div>
+                    <div class="form-group my-3">
                         <input formControlName="discount" type="text" class="form-control" placeholder="discount" name="discount" [class.is-invalid]="formFields.discount?.invalid && formFields.discount?.touched">
-                        <input formControlName="image" type="text" class="form-control" placeholder="image" name="image" [class.is-invalid]="formFields.image?.invalid && formFields.image?.touched">
+                    </div>
+                    <div class="form-group my-3">
+                        <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+                    </div>
+                    <div class="form-group my-3">
                         <input formControlName="quantity" type="text" class="form-control" placeholder="quantity" name="quantity" [class.is-invalid]="formFields.quantity?.invalid && formFields.quantity?.touched">
+                    </div>
+                    <div class="form-group my-3">
                         <input formControlName="categoryId" type="text" class="form-control" placeholder="categoryId" name="categoryId" [class.is-invalid]="formFields.categoryId?.invalid && formFields.categoryId?.touched">
+                    </div>
+                    <div class="form-group my-3">
                         <input formControlName="colorId" type="text" class="form-control" placeholder="colorId" name="colorId" [class.is-invalid]="formFields.colorId?.invalid && formFields.colorId?.touched">
+                    </div>
                         <!-- <div *ngIf="userName?.invalid && userName?.touched"> 
                                 <small *ngIf="userName?.errors?.required" class="text-danger">user name is required</small>
                                 <small *ngIf="userName?.errors?.pattern" class="text-danger">user name must be character only</small>
-                            </div> -->
-                    </div>
+                            </div> --> 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" #addOrUpdateModelCloseBtn>Close</button>

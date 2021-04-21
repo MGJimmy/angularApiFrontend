@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 import { Product } from 'src/app/_models/_classes/Product';
 import { IProduct } from 'src/app/_models/_interfaces/IProduct';
 import { ProductService } from 'src/app/_services/product.service';
+import { environment } from 'src/environments/environment';
 import { ConfirmModalComponent } from '../../_reusableComponents/confirm-modal/confirm-modal.component';
 
 @Component({
@@ -26,6 +27,7 @@ export class ProductsComponent implements OnInit {
   pageSize:number = 8;
   currentPageNumber:number = 1;
   numberOfPages:number; // productsCount / pageSize
+  public response: {dbPath: ''};
 
   // convenience getter for easy access to form fields
   get formFields() { return this.productForm.controls; }
@@ -50,7 +52,6 @@ export class ProductsComponent implements OnInit {
       price:['', Validators.required],
       description:[''],
       discount:['', Validators.required],
-      image:['', Validators.required],
       quantity:['', Validators.required],
       categoryId:['', Validators.required],
       colorId:['', Validators.required],
@@ -73,7 +74,7 @@ export class ProductsComponent implements OnInit {
       price: this.formFields.price.value,
       description: this.formFields.description.value,
       discount: this.formFields.discount.value,
-      image: this.formFields.image.value,
+      image : this.response.dbPath,
       quantity: this.formFields.quantity.value,
       categoryId: this.formFields.categoryId.value,
       colorId: this.formFields.colorId.value,
@@ -106,7 +107,9 @@ export class ProductsComponent implements OnInit {
     this._ProductToUpdate.price = this.formFields.price.value;
     this._ProductToUpdate.description = this.formFields.description.value;
     this._ProductToUpdate.discount = this.formFields.discount.value;
-    this._ProductToUpdate.image = this.formFields.image.value;
+    if(this.response.dbPath != ''){ // if the user doesn't change the image 
+      this._ProductToUpdate.image = this.response.dbPath;
+    }
     this._ProductToUpdate.quantity = this.formFields.quantity.value;
     this._ProductToUpdate.categoryId = this.formFields.categoryId.value;
     this._ProductToUpdate.colorId = this.formFields.colorId.value;
@@ -127,6 +130,7 @@ export class ProductsComponent implements OnInit {
   }
 
   onAddOrUpdateSubmit(){
+    console.log("click btn")
     if(this.actionName == "Add"){
       this.onAddProductSubmit();
     }else{
@@ -186,5 +190,11 @@ export class ProductsComponent implements OnInit {
        this.errorMsg = error;
       }
     ) 
+  }4
+  public uploadFinished = (event) => { 
+    this.response = event;
+  }
+  public createImgPath = (serverPath: string) => {
+    return `${environment.apiUrl}/${serverPath}`;
   }
 }
