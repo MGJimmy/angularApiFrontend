@@ -27,6 +27,7 @@ export class DashboardSidebarComponent implements OnInit {
   }
 
   navigateToColors(): void {
+    
     this._router.navigate(['colors'],{relativeTo:this._activatedRoute});   
   }
 }

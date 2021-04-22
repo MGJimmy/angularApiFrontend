@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +24,13 @@ import { UsersComponent } from './components/dashboard/users/users.component';
 import { UploadComponent } from './components/_reusableComponents/upload/upload.component';
 import { HomeComponent } from './components/client/home/home.component';
 import { ColorsComponent } from './components/dashboard/colors/colors.component';
+import { ShopComponent } from './components/client/shop/shop.component';
+import { CartComponent } from './components/client/cart/cart.component';
+import { WishlistComponent } from './components/client/wishlist/wishlist.component';
+import { ProductDetailsComponent } from './components/client/product-details/product-details.component';
+import { CheckoutComponent } from './components/client/checkout/checkout.component';
+import { SearchResultsComponent } from './components/client/search-results/search-results.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @NgModule({
   declarations: [
@@ -43,14 +51,22 @@ import { ColorsComponent } from './components/dashboard/colors/colors.component'
     UsersComponent,
     UploadComponent,
     HomeComponent,
-    ColorsComponent
+    ColorsComponent,
+    ShopComponent,
+    CartComponent,
+    WishlistComponent,
+    ProductDetailsComponent,
+    CheckoutComponent,
+    SearchResultsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    CarouselModule
   ],
   providers: [
    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

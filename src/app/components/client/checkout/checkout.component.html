@@ -1,0 +1,68 @@
+<section id="checkoutPage" class="checkoutPage">
+  <div class="container">
+    <h2 class="cartName text-center display-3 my-5">Checkout</h2>
+    <form id="checkoutForm" class="w-100">
+      <div class="row">
+        <div class="col-md-7">
+          <h3 class="mb-3">Billing details</h3>
+          
+            <div class="form-group">
+              <label for="">Full name <span class="required">*</span></label>
+              <input type="text" class="form-control" placeholder="Full name" required>
+            </div>
+            <div class="form-group">
+              <label for="">Company name</label>
+              <input type="text" class="form-control" placeholder="Company name">
+            </div>
+            <div class="form-group">
+              <label for="">Country <span class="required">*</span></label>
+              <select class="form-control" required>
+                <option>Egypt</option>
+                <option>Italy</option>
+                <option>Englan</option>
+                <option>USA</option>
+                <option>France</option>
+                <option>Oman</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="">Street address <span class="required">*</span></label>
+              <input type="text" class="form-control" placeholder="Street address" required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Apartment, unit etc (optional)" >
+            </div>
+            <div class="form-group">
+              <label for="">Town/City <span class="required">*</span></label>
+              <input type="text" class="form-control" placeholder="Town/City" required>
+            </div>
+            <div class="form-group">
+              <label for="">Postcode <span class="required">*</span></label>
+              <input type="text" class="form-control" placeholder="Postcode" required>
+            </div>
+          
+        </div>
+        <div class="col-md-5">
+          <h3 class="mb-3">Your order</h3>
+          <table class="table table-striped mt-5">
+            <tbody>
+              <tr>
+                <td scope="row">Products price</td>
+                <td id="checkoutPrice"></td>
+              </tr>
+              <tr>
+                <td scope="row">Shipping</td>
+                <td>$60</td>
+              </tr>
+              <tr>
+                <td>Total price</td>
+                <td id="checkoutTotPrice"></td>
+              </tr>
+            </tbody>
+          </table>
+          <button type="submit" class="btn btn-dark btn-lg w-100">Checkout</button>
+        </div>
+      </div>
+  </form>
+  </div>
+</section>

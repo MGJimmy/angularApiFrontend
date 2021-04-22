@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CartComponent } from './components/client/cart/cart.component';
 import { ClientComponent } from './components/client/client.component';
 import { HomeComponent } from './components/client/home/home.component';
+import { ProductDetailsComponent } from './components/client/product-details/product-details.component';
+import { SearchResultsComponent } from './components/client/search-results/search-results.component';
+import { ShopComponent } from './components/client/shop/shop.component';
+import { WishlistComponent } from './components/client/wishlist/wishlist.component';
 import { CategoriesComponent } from './components/dashboard/categories/categories.component';
 import { ColorsComponent } from './components/dashboard/colors/colors.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -33,10 +38,16 @@ const routes: Routes = [
     path:'', 
     component:ClientComponent,
     children:[
-      {path: '', component: HomeComponent}
+      {path: '', component: HomeComponent},
+      {path: 'shop', component: ShopComponent},
+      {path: 'cart', component: CartComponent},
+      {path: 'wishlist', component: WishlistComponent},
+      {path: 'search-results/:keyword', component: SearchResultsComponent},
+      {path: 'product-details/:id', component: ProductDetailsComponent},  
+
     ]
   },
-  {path: '**', component: PageNotFoundComponent}
+  {path: '**', component: PageNotFoundComponent},
  
 ];
 

@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 .dBAddNewBtn
 {
   font-size: 1.3rem;
@@ -51,10 +53,9 @@ i {cursor: pointer;}
   a:hover {text-decoration: none;}
 
   .navbar {
-    background: rgb(0, 0, 0, 0.7);
+    background: rgb(0, 0, 0, 1);
     color: #fff;
     z-index: 9999;
-    position: absolute;
   }
 
   .navbar-dark .navbar-nav .nav-link:hover,
@@ -105,7 +106,6 @@ i {cursor: pointer;}
   .carousel .carousel-item .text button {padding: 5px 15px; font-size: 8px;}
   
 }
-
 
 /* Mobile screen */
 @media(min-width: 577px) and (max-width: 767px) {
