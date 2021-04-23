@@ -27,17 +27,24 @@ export class RegisterService {
     }));
   }
 
-  addNewAdmin(newProduct: IUser): Observable<IUser> {
+  getCurrentUser(): Observable<IUser> {
+    let url = `${environment.apiUrl}/api/account/current`;
+    return this._http.get<IUser>(url).pipe(catchError((err) => {
+      return throwError(err.message || "Internal Server error contact site adminstarator");
+    }));
+  }
+
+  addNewAdmin(newUser: IUser): Observable<IUser> {
     let url = `${environment.apiUrl}/RegisterAdmin`;
-    return this._http.post<IUser>(url, newProduct)
+    return this._http.post<IUser>(url, newUser)
       .pipe(catchError((err) => {
         return throwError(err.message || "Internal Server error contact site adminstarator");
       }
       ));
   }
-  addNewUser(newProduct: IUser): Observable<IUser> {
+  addNewUser(newUser: IUser): Observable<IUser> {
     let url = `${environment.apiUrl}/Register`;
-    return this._http.post<IUser>(url, newProduct)
+    return this._http.post<IUser>(url, newUser)
       .pipe(catchError((err) => {
         return throwError(err.message || "Internal Server error contact site adminstarator");
       }
@@ -45,7 +52,7 @@ export class RegisterService {
   }
 
   updateUser(id: string, userToUpdate: IUser): Observable<IUser> {
-    let url = `${environment.apiUrl}/api/account`;
+    let url = `${environment.apiUrl}/api/account/${id}`;
     return this._http.put<IUser>(url, userToUpdate)
       .pipe(catchError((err) => {
         return throwError(err.message || "Internal Server error contact site adminstarator");
