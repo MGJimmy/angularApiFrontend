@@ -167,6 +167,7 @@ export class CategoriesComponent implements OnInit {
     ) 
   }
 
+  // upload image
   public uploadFinished = (event) => { 
     this.response = event;
   }

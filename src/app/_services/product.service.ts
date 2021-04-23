@@ -65,4 +65,10 @@ export class ProductService {
       return throwError(err.message || "Internal Server error contact site adminstarator");
     }));
   }
+  getProductsByCategory(categoryId:number, pageSize: number, pageNumber: number): Observable<Product[]> {
+    let url = `${environment.apiUrl}/api/product/category/${categoryId}/${pageSize}/${pageNumber}`;
+    return this._http.get<Product[]>(url).pipe(catchError((err) => {
+      return throwError(err.message || "Internal Server error contact site adminstarator");
+    }));
+  }
 }
