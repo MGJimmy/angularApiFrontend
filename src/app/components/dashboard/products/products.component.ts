@@ -33,7 +33,7 @@ export class ProductsComponent implements OnInit {
   pageSize:number = 8;
   currentPageNumber:number = 1;
   numberOfPages:number; // productsCount / pageSize
-  public response: {dbPath: ''};
+  public response = {dbPath: ''};
 
   // convenience getter for easy access to form fields
   get formFields() { return this.productForm.controls; }
@@ -127,6 +127,7 @@ export class ProductsComponent implements OnInit {
   }
 
   private onUpdateProductSubmit(){
+    console.log(this.response);
     this.submitted = true;
 
     // stop here if form is invalid
@@ -162,7 +163,6 @@ export class ProductsComponent implements OnInit {
   }
 
   onAddOrUpdateSubmit(){
-    console.log("click btn")
     if(this.actionName == "Add"){
       this.onAddProductSubmit();
     }else{
@@ -185,7 +185,6 @@ export class ProductsComponent implements OnInit {
                   price:data.price,
                   description:data.description,
                   discount:data.discount,
-                  image:data.image,
                   quantity:data.quantity,
                   categoryId:data.categoryId,
                   colorId:data.colorId

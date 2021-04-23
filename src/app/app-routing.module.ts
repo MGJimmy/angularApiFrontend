@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CartComponent } from './components/client/cart/cart.component';
+import { CheckoutComponent } from './components/client/checkout/checkout.component';
 import { ClientComponent } from './components/client/client.component';
 import { HomeComponent } from './components/client/home/home.component';
 import { ProductDetailsComponent } from './components/client/product-details/product-details.component';
@@ -42,6 +43,7 @@ const routes: Routes = [
       {path: 'shop', component: ShopComponent},
       {path: 'cart', component: CartComponent},
       {path: 'wishlist', component: WishlistComponent},
+      {path: 'checkout', component: CheckoutComponent},
       {path: 'search-results/:keyword', component: SearchResultsComponent},
       {path: 'product-details/:id', component: ProductDetailsComponent},  
 
