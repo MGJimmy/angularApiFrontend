@@ -1,8 +1,12 @@
-<section id="singleProductPage" *ngIf="product != null">
-  
+<!-- *ngIf="product != null" -->
+<section id="singleProductPage" >
+ 
+  <div class="mt-5">{{product|json}}</div>
+
+
   <div class="container">
     <div id="singleProductContainer" class="row productsContainer">
-      <div class="col-md-6"><img [src]="createImgPath(product.image)" class="w-100"></div>
+      <!-- <div class="col-md-6"><img [src]="createImgPath(product.image)" class="w-100"></div> -->
       <div class="col-md-6">
         <h2 class="my-3 display-3">{{product.name }} </h2>
         <div class="my-3 font-italic h2">{{product.price}} </div>

@@ -3,7 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { Product } from 'src/app/_models/_classes/Product';
+import { ICategory } from 'src/app/_models/_interfaces/ICategory';
+import { IColor } from 'src/app/_models/_interfaces/IColor';
 import { IProduct } from 'src/app/_models/_interfaces/IProduct';
+import { CategoryService } from 'src/app/_services/category.service';
+import { ColorService } from 'src/app/_services/color.service';
 import { ProductService } from 'src/app/_services/product.service';
 import { environment } from 'src/environments/environment';
 import { ConfirmModalComponent } from '../../_reusableComponents/confirm-modal/confirm-modal.component';
@@ -17,7 +21,9 @@ export class ProductsComponent implements OnInit {
   @ViewChild('addOrUpdateModelCloseBtn') addOrUpdateModelCloseBtn;
   @ViewChild(ConfirmModalComponent) confirmModal:ConfirmModalComponent;
   private _ProductToUpdate:IProduct;
-  allProducts:Product[]; 
+  allProducts:Product[];
+  allcColors:IColor[];
+  allCategories:ICategory[];
   errorMsg:string;
   productForm : FormGroup;
   loading = false;
@@ -33,7 +39,7 @@ export class ProductsComponent implements OnInit {
   get formFields() { return this.productForm.controls; }
   constructor(private _productService:ProductService,
     private _formBuilder: FormBuilder,
-    private _router:Router) { }
+    private _router:Router,private _categoryService:CategoryService,private _colorService:ColorService) { }
 
   ngOnInit(): void {
     this._productService.getProductsCount().subscribe(
@@ -57,6 +63,30 @@ export class ProductsComponent implements OnInit {
       colorId:['', Validators.required],
     });
     this.getSelectedPage(1);
+   //get all categories
+   this._categoryService.getAllCategories().subscribe(
+    data => {
+      this.allCategories = data
+   
+    },
+    error=>
+    {
+     this.errorMsg = error;
+    }
+  )
+  
+  //get all colors
+  this._colorService.getAllColors().subscribe(
+    data => {
+      this.allcColors = data
+   
+    },
+    error=>
+    {
+     this.errorMsg = error;
+    }
+  )
+    
   }
 
   private onAddProductSubmit() {

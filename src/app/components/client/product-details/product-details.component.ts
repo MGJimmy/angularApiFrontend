@@ -58,30 +58,51 @@ export class ProductDetailsComponent implements OnInit {
     //     });
   
   }
-  test(){
-    this._routerActivate.paramMap.subscribe((params:ParamMap)=>{
-      this.productID=parseInt(params.get('id'));
-  
-    })
-
-    this._productServie.getProductById(this.productID)
-    .pipe(first())
-    .subscribe(
-        data => {
-          this.product = data;
-          console.log(this.product)
-        },
-        error => {
-            this.errorMsg = error;
-          
-        });
-  }
+ 
   public createImgPath = (serverPath: string) => {
     return `${environment.apiUrl}/${serverPath}`;
   }
 
   ngAfterContentInit(){
     console.log("ngAfterContentInit called")
+  }
+  ngDoCheck(){
+  //   this._routerActivate.paramMap.subscribe((params:ParamMap)=>{
+  //     this.productID=parseInt(params.get('id'));
+  
+  //   })
+
+  //   this._productServie.getProductById(this.productID)
+  //   .pipe(first())
+  //   .subscribe(
+  //       data => {
+  //         this.product = data;
+  //         console.log(this.product)
+  //       },
+  //       error => {
+  //           this.errorMsg = error;
+          
+  //       });
+  //       console.log("oninit called");
+  }
+  ngAfterContentChecked(){
+    // this._routerActivate.paramMap.subscribe((params:ParamMap)=>{
+    //   this.productID=parseInt(params.get('id'));
+  
+    // })
+
+    // this._productServie.getProductById(this.productID)
+    // .pipe(first())
+    // .subscribe(
+    //     data => {
+    //       this.product = data;
+    //       console.log(this.product)
+    //     },
+    //     error => {
+    //         this.errorMsg = error;
+          
+    //     });
+    //     console.log("oninit called");
   }
   
 

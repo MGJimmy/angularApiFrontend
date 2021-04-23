@@ -85,11 +85,24 @@
                     <div class="form-group my-3">
                         <input formControlName="quantity" type="text" class="form-control" placeholder="quantity" name="quantity" [class.is-invalid]="formFields.quantity?.invalid && formFields.quantity?.touched">
                     </div>
+           
+
                     <div class="form-group my-3">
-                        <input formControlName="categoryId" type="text" class="form-control" placeholder="categoryId" name="categoryId" [class.is-invalid]="formFields.categoryId?.invalid && formFields.categoryId?.touched">
+                        <select class="form-control" formControlName="categoryId"  >
+                            <option selected> Category</option>
+                            <option value="{{category.id}}" *ngFor="let category of allCategories">
+                               {{category.name}}
+                            </option>
+                         </select>
                     </div>
+
                     <div class="form-group my-3">
-                        <input formControlName="colorId" type="text" class="form-control" placeholder="colorId" name="colorId" [class.is-invalid]="formFields.colorId?.invalid && formFields.colorId?.touched">
+                        <select class="form-control" formControlName="colorId"  >
+                            <option selected> Color</option>
+                            <option value="{{color.id}}" *ngFor="let color of allcColors">
+                               {{color.name}}
+                            </option>
+                         </select>
                     </div>
                         <!-- <div *ngIf="userName?.invalid && userName?.touched"> 
                                 <small *ngIf="userName?.errors?.required" class="text-danger">user name is required</small>
