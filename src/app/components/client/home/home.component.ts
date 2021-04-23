@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { ICategory } from 'src/app/_models/_interfaces/ICategory';
 import { IProduct } from 'src/app/_models/_interfaces/IProduct';
+import { CategoryService } from 'src/app/_services/category.service';
 import { ProductService } from 'src/app/_services/product.service';
 import { environment } from 'src/environments/environment';
 
@@ -11,8 +14,9 @@ import { environment } from 'src/environments/environment';
 })
 export class HomeComponent implements OnInit {
   newArrivalsProducts:IProduct[];
+  categories:ICategory[];
   errorMsg:string;
-  constructor( private _productService:ProductService) { }
+  constructor( private _productService:ProductService,private _categoryService:CategoryService,private _router:Router) { }
   
   // owl carousel
   customOptions: OwlOptions = {
@@ -49,18 +53,37 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._productService.getNewArrivalsProducts(4).subscribe(
+    //get latest number of products
+    this._productService.getNewArrivalsProducts(3).subscribe(
       data => {
         this.newArrivalsProducts = data
+        console.log(this.newArrivalsProducts);
       },
       error=>
       {
        this.errorMsg = error;
       }
     ) 
+
+    //get all categories
+    this._categoryService.getAllCategories().subscribe(
+      data => {
+        this.categories = data
+       
+      },
+      error=>
+      {
+       this.errorMsg = error;
+      }
+    )
+
   }
 
   public createImgPath = (serverPath: string) => {
     return `${environment.apiUrl}/${serverPath}`;
+  }
+  public navigateToProductDetails(id:number){
+    this._router.navigate(['/product-details',id])
+  
   }
 }

@@ -78,6 +78,8 @@ export class ProductsComponent implements OnInit {
       quantity: this.formFields.quantity.value,
       categoryId: this.formFields.categoryId.value,
       colorId: this.formFields.colorId.value,
+      categoryName:" ", //this will be changed for 
+      colorName:" "    //this will changed also
     };
     this._productService.addNewProduct(newProduct)
         .pipe(first())

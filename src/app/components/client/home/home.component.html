@@ -38,10 +38,10 @@
   <h2 class="my_h text-uppercase font-weight-bold" >new arrivals</h2>
   <p class="my_p mb-5 mx-auto"> which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled</p>
   <owl-carousel-o [options]="customOptions">
-    <ng-template carouselSlide *ngFor="let product of newArrivalsProducts">
-      <div class="slide">
+    <ng-template carouselSlide  *ngFor="let product of newArrivalsProducts">
+      <div class="slide" (click)="navigateToProductDetails(product.id)">
         <div class="ad">
-          <div class="image"><img class="w-100" [src]="createImgPath(product.image)"></div>
+          <div class="image"><img class="w-100"  [src]="createImgPath(product.image)"></div>
           <div class="text text-uppercase">
             <p class="w-50 mx-auto mt-4" > {{product.name}} </p>
             <p class="price">{{product.price}} $</p>
@@ -65,14 +65,15 @@
   </div>
   <div class="row">
     
-    <div class="col-sm-6 col-lg-4 my-3">
+    <div style="height: 150px;" class="col-sm-6 col-lg-4 my-3 " *ngFor="let category of categories" >
       <div class="womens position-relative overflow-hidden">
         <div class="bg position-absolute w-100 h-100">
-          <div class="bg_image w-100 h-100"></div>
+          <div  class="bg_image w-100 h-100"></div>
           <div class="overlay w-100 h-100"></div>
+          <!-- <div class="image"><img class="w-100" [src]="createImgPath(category.image)"></div> -->
         </div>
         <div class="content position-relative w-50 text-capitalize">
-          <p class="font-weight-bold"> womens clothes collection</p>
+          <p class="font-weight-bold">{{category.name}}</p>
           <a class="py-2" href="pages/clothes.html" data-page="page02">shop clothes</a>
         </div>             
       </div>

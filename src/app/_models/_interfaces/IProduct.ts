@@ -8,4 +8,7 @@ export interface IProduct {
   quantity:number,
   categoryId:number,
   colorId:number,
+  colorName:string;
+  categoryName:string
+  
 }
