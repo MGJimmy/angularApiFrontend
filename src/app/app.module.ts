@@ -31,6 +31,8 @@ import { ProductDetailsComponent } from './components/client/product-details/pro
 import { CheckoutComponent } from './components/client/checkout/checkout.component';
 import { SearchResultsComponent } from './components/client/search-results/search-results.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 
 @NgModule({
   declarations: [
@@ -66,7 +68,9 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    CarouselModule
+    CarouselModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule
   ],
   providers: [
    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

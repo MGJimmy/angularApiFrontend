@@ -1,12 +1,11 @@
-<!-- *ngIf="product != null" -->
-<section id="singleProductPage" >
- 
-  <div class="mt-5">{{product|json}}</div>
 
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-pulse" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+
+<section id="singleProductPage" *ngIf="product != null" >
 
   <div class="container">
     <div id="singleProductContainer" class="row productsContainer">
-      <!-- <div class="col-md-6"><img [src]="createImgPath(product.image)" class="w-100"></div> -->
+      <div class="col-md-6"><img [src]="createImgPath(product.image)" class="w-100"></div>
       <div class="col-md-6">
         <h2 class="my-3 display-3">{{product.name }} </h2>
         <div class="my-3 font-italic h2">{{product.price}} </div>
