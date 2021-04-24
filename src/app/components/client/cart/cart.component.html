@@ -9,17 +9,20 @@
                     <th scope="col">Price</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Total Price</th>
+                    <th scope="col">After Discount</th>
+
                     <th scope="col"><i class="fas fa-trash-alt"></i></th>
                 </tr>
             </thead>
-            <tbody id="cartBody" *ngFor="let product of products">
+            <tbody  id="cartBody" *ngFor="let product of products;let i=index">
                 <!-- foreach  cartproduct -->
                 <tr data-id=" value.id ">
                     <td scope="row" class="image"><img class="w-100" [src]="product.image"></td>
                     <td class="align-middle">{{product.name}}</td>
                     <td class="cartItemPrice align-middle">{{product.price}}</td>
-                    <td class="align-middle"> <input type="number" class="itemQuantity" value="1"> </td>
-                    <td class="itemTotPriceDiv align-middle"></td>
+                    <td class="align-middle"> <input (change)="quantityChanged(productQuantity.value,product.id)" type="number" #productQuantity class="itemQuantity" value="1"> </td>
+                    <td class="itemTotPriceDiv align-middle">{{computerTotalProductPrice(product.id)}}</td>
+                    <td class="itemTotPriceDiv align-middle">{{computerTotalProductPriceAfterDiscount(product.id)}}</td>
                     <td id="deleteItem" class="align-middle deleteItem"><i class="fas fa-trash-alt"></i></td>
                 </tr>
             </tbody>
@@ -28,7 +31,7 @@
             <div class="col-md-6">
                 <div id="totallprice"></div>
             </div>
-            <div class="col-md-6"><button type="button" id="goToCheckout" class="btn btn-primary d-inline-block ml-auto">Checkout</button></div>
+            <div class="col-md-6"><a (click)="ComputeCartAndgoToCheckout()" type="button" id="goToCheckout" class="btn btn-primary d-inline-block ml-auto">Checkout</a></div>
         </div>
     </div>
 </section>
