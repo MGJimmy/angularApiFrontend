@@ -29,33 +29,24 @@
         <div class="options_01 text-capitalize d-none d-md-block">
           <ul class=" list-unstyled ml-3 ">
             <li *ngFor="let category of allCategories" class="cursorPointer">
-              <a [routerLink]="" [queryParams]="{ category: category.id}" (click)="changeSelectedCategoryName(category.name)">
+              <a [routerLink]="" [queryParams]="{ categoryId: category.id}" (click)="changeSelectedCategoryName(category.name)">
                 {{category.name}} 
               </a> 
             </li>
           </ul>
         </div>
       </div>
-      <div class="custom_search">
-        <h5 class="text-uppercase py-3" >Colors <i class="open_opotions_02 float-right text-black fas fa-plus fa-xs d-md-none"></i></h5>
-        <div class="options_02 text-capitalize d-none d-md-block">
-          <form>
-            <div class="color ml-3">
-              <p class="font-weight-bold">color</p>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" >
-                <label class="form-check-label" for="defaultCheck1">
-                  black (67)
-                </label>
-              </div>
-            </div>
-            <button class="my-4 ml-3" type="submit" >search</button>
-          </form>
+      <div class="Colors">
+        <h5 class="text-uppercase py-3" >Colors <i class="open_opotions_01 float-right text-black fas fa-plus fa-xs  d-md-none"></i></h5>
+        <div class="options_01 text-capitalize d-none d-md-block">
+          <ul class=" list-unstyled ml-3 ">
+            <li *ngFor="let color of allColors" class="cursorPointer">
+              <a [routerLink]="" [queryParams]="{ colorId: color.id}" (click)="changeSelectedColorName(color.name)">
+                {{color.name}} 
+              </a> 
+            </li>
+          </ul>
         </div>
-
-      </div>
-      <div class="sec_ad p-3 d-none d-md-block">
-        <img class="w-100" src="" alt="ad">
       </div>
       
     </div>
@@ -67,8 +58,10 @@
         <div class="col-md-4 box mb-4" *ngFor="let product of productsPerPage">
 
           <div class="image position-relative overflow-hidden">
-            <img class="w-100" [src]="createImgPath(product.image)" alt="img1">
-            <img class="top w-100 position-absolute" [src]="createImgPath(product.image)" alt="img1">
+            <a routerLink="/product-details/{{ product.id }}">
+              <img class="w-100" [src]="createImgPath(product.image)" alt="img1">
+              <img class="top w-100 position-absolute" [src]="createImgPath(product.image)" alt="img1">
+            </a>
             <div class="quickview position-absolute w-100 main_color text-center"><i class="fas fa-eye"></i> Quickview</div>
           </div>
           
@@ -81,7 +74,9 @@
              <span><i class="fas fa-star fa-xs text-secondary"></i></span>
             </div>
             <p class="name my-0 text-secondary"> {{product.name}} </p>
-            <p class="name my-0 text-secondary"> <i class="fas fa-tag"></i> {{product.categoryName}} </p>
+            <p class="name my-0 text-secondary"> 
+              <i class="fas fa-tag"></i> {{product.categoryName}} 
+            </p>
             <p class="price font-weight-bold text-danger"> {{product.price|currency}} </p>
           </div>
 

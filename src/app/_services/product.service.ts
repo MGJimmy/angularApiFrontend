@@ -53,8 +53,14 @@ export class ProductService {
       return throwError(err.message || "Internal Server error contact site adminstarator");
     }));
   }
-  getProductsCount(): Observable<number> {
+  getProductsCount(categoryId:number = 0, colorId = 0): Observable<number> {
     let url = `${environment.apiUrl}/api/product/count`;
+    if(categoryId != 0){
+      url = `${environment.apiUrl}/api/product/count?categoryId=${categoryId}`;
+    }
+    if(colorId != 0){
+      url = `${environment.apiUrl}/api/product/count?colorId=${colorId}`;
+    }
     return this._http.get<number>(url).pipe(catchError((err) => {
       return throwError(err.message || "Internal Server error contact site adminstarator");
     }));
@@ -65,8 +71,20 @@ export class ProductService {
       return throwError(err.message || "Internal Server error contact site adminstarator");
     }));
   }
-  getProductsByCategory(categoryId:number, pageSize: number, pageNumber: number): Observable<Product[]> {
+  getProductsByCategoryPaging(categoryId:number, pageSize: number, pageNumber: number): Observable<Product[]> {
     let url = `${environment.apiUrl}/api/product/category/${categoryId}/${pageSize}/${pageNumber}`;
+    return this._http.get<Product[]>(url).pipe(catchError((err) => {
+      return throwError(err.message || "Internal Server error contact site adminstarator");
+    }));
+  }
+  getProductsByColorPaging(colorId:number, pageSize: number, pageNumber: number): Observable<Product[]> {
+    let url = `${environment.apiUrl}/api/product/color/${colorId}/${pageSize}/${pageNumber}`;
+    return this._http.get<Product[]>(url).pipe(catchError((err) => {
+      return throwError(err.message || "Internal Server error contact site adminstarator");
+    }));
+  }
+  getProductsBySearch(searchKeyWord:string): Observable<Product[]> {
+    let url = `${environment.apiUrl}/api/product/search/${searchKeyWord}`;
     return this._http.get<Product[]>(url).pipe(catchError((err) => {
       return throwError(err.message || "Internal Server error contact site adminstarator");
     }));

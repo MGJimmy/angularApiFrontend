@@ -72,12 +72,10 @@
             <img class="w-100 h-100" [src]="createImgPath(category.image)" alt="">
           </div>
           <div class="overlay w-100 h-100"></div>
-          <!-- <div class="image"><img class="w-100" [src]="createImgPath(category.image)"></div> -->
         </div>
-        {{createImgPath(category.image)}}
         <div class="content position-relative w-50 text-capitalize">
           <p class="font-weight-bold">{{category.name}}</p>
-          <a class="py-2" href="pages/clothes.html" data-page="page02">shop clothes</a>
+          <a class="py-2" routerLink="/shop" [queryParams]="{ category: category.id}" data-page="page02">shop {{category.name}}</a>
         </div>             
       </div>
     </div>

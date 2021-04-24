@@ -29,6 +29,8 @@ export class ShopComponent implements OnInit {
 
   selectedCategoryId:number;
   selectedCategoryName:string;
+  selectedColorId:number;
+  selectedColorName:string;
   constructor(
     private _productSevice:ProductService,
     private _categoryService:CategoryService,
@@ -41,7 +43,9 @@ export class ShopComponent implements OnInit {
       .queryParams
       .subscribe(params => {
         // Defaults to 0 if no query param provided.
-        this.selectedCategoryId = params['category'] || 0;
+        //this.selectedCategoryId = this.selectedColorId = 0
+        this.selectedCategoryId = params['categoryId'] || 0;
+        this.selectedColorId = params['colorId'] || 0;
         this.changePagetTitle();
         this.getSelectedPage(1); 
 
@@ -53,7 +57,6 @@ export class ShopComponent implements OnInit {
     this._categoryService.getAllCategories().subscribe(
       data=>{
         this.allCategories = data
-        console.log("all categories here");
       },
       error=>{
         this.errorMsg = error;
@@ -67,26 +70,26 @@ export class ShopComponent implements OnInit {
         this.errorMsg = error;
       }
     )
-    this._productSevice.getProductsCount().subscribe(
-      data => {
-        this.productsCount = data
-        this.numberOfPages = Math.ceil(this.productsCount / this.pageSize)
-      },
-      error=>
-      {
-       this.errorMsg = error;
-      }
-    ) 
-  
+    this.getProductsCount();
   }
-  changeSelectedCategoryName(categoryName){
-    this.selectedCategoryName = categoryName
-  }
-
   getProductsForCategoryPerPage(currentPageNumber:number):void{
-    this._productSevice.getProductsByCategory(this.selectedCategoryId, this.pageSize, currentPageNumber).subscribe(
+    this._productSevice.getProductsByCategoryPaging(this.selectedCategoryId, this.pageSize, currentPageNumber).subscribe(
       data=>{
         this.productsPerPage = data
+        this.getProductsCount(this.selectedCategoryId);
+        this.currentPageNumber = currentPageNumber;
+      },
+      error=>{
+        this.errorMsg = error
+      }
+    );
+  }
+  getProductsForColorPerPage(currentPageNumber:number):void{
+    this._productSevice.getProductsByColorPaging(this.selectedColorId, this.pageSize, currentPageNumber).subscribe(
+      data=>{
+        this.productsPerPage = data
+        console.log(data)
+        this.getProductsCount(0, this.selectedColorId);
         this.currentPageNumber = currentPageNumber;
       },
       error=>{
@@ -100,20 +103,14 @@ export class ShopComponent implements OnInit {
       data => {
         this.productsPerPage = data
         this.currentPageNumber = currentPageNumber;
+      this.getProductsCount();
+
       },
       error=>
       {
        this.errorMsg = error;
       }
     ) 
-  }
-  changePagetTitle(){
-    if(this.selectedCategoryId != 0){
-      this.title = "Category: " + this.selectedCategoryName;
-    }
-    else{
-      this.title = "All products"
-    }
   }
   // dealing with cart
   addProductToCart(productId:number){
@@ -144,12 +141,46 @@ export class ShopComponent implements OnInit {
   getSelectedPage(currentPageNumber:number){
     if(this.selectedCategoryId != 0){
       this.getProductsForCategoryPerPage(currentPageNumber);
-    }else{
+    }
+    else if(this.selectedColorId != 0){
+      this.getProductsForColorPerPage(currentPageNumber);
+    }
+    else{
       this.getProductsPerPage(currentPageNumber);
     }
   }
   // image path
   public createImgPath = (serverPath: string) => {
     return `${environment.apiUrl}/${serverPath}`;
+  }
+
+  changeSelectedCategoryName(categoryName){
+    this.selectedCategoryName = categoryName
+  }
+  changeSelectedColorName(colorName){
+    this.selectedColorName = colorName
+  }
+  getProductsCount(categoryId = 0, colorId = 0){
+    this._productSevice.getProductsCount(categoryId, colorId).subscribe(
+      data => {
+        this.productsCount = data
+        this.numberOfPages = Math.ceil(this.productsCount / this.pageSize)
+      },
+      error=>
+      {
+       this.errorMsg = error;
+      }
+    ) 
+  }
+  changePagetTitle(){
+    if(this.selectedCategoryId != 0){
+      this.title = "Category: " + this.selectedCategoryName;
+    }
+    else if(this.selectedColorId != 0){
+      this.title = "Color: " + this.selectedColorName;
+    }
+    else{
+      this.title = "All products"
+    }
   }
 }

@@ -44,7 +44,7 @@ const routes: Routes = [
       {path: 'cart', component: CartComponent},
       {path: 'wishlist', component: WishlistComponent},
       {path: 'checkout', component: CheckoutComponent},
-      {path: 'search-results/:keyword', component: SearchResultsComponent},
+      {path: 'search-results/:searchkeyword', component: SearchResultsComponent},
       {path: 'product-details/:id', component: ProductDetailsComponent},  
 
     ]
