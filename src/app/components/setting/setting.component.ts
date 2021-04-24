@@ -6,16 +6,17 @@ import { IUser } from 'src/app/_models/_interfaces/IUser';
 import { RegisterService } from 'src/app/_services/register.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-setting',
+  templateUrl: './setting.component.html',
+  styleUrls: ['./setting.component.scss']
 })
-export class RegisterComponent implements OnInit {
-  registerForm: FormGroup;
+export class SettingComponent implements OnInit {
+  settingForm: FormGroup;
   loading = false;
   submitted = false;
   error = '';
   genderList = ["male", "female"]
+
   constructor
     (private formBuilder: FormBuilder,
       private _route: ActivatedRoute,
@@ -24,37 +25,56 @@ export class RegisterComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.registerForm = this.formBuilder.group({
+    this.settingForm = this.formBuilder.group({
+      currentUserID : [''],
       username: ['', Validators.required],
-      password: ['', Validators.required],
       email: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       gender: ['', Validators.required]
     });
+    this._registerService.getCurrentUser()
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.settingForm.setValue({
+            currentUserID: data.id,
+            username: data.userName,
+            email: data.email,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            gender: data.gender
+          });
+        },
+        error => {
+          this.error = error;
+          this.loading = false;
+        });
   }
 
-  get formFields() { return this.registerForm.controls; }
+  get formFields() { return this.settingForm.controls; }
 
   onSubmit() {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.registerForm.invalid) {
+    if (this.settingForm.invalid) {
       return;
     }
 
     this.loading = true;
-    let newUser: IUser = {
-      id: "",
+    let UpdatedUser: IUser = {
+      id: this.formFields.currentUserID.value,
       userName: this.formFields.username.value,
-      passwordHash: this.formFields.password.value,
+      passwordHash: "@Admin12345",
       email: this.formFields.email.value,
       firstName: this.formFields.firstName.value,
       lastName: this.formFields.lastName.value,
       gender: this.formFields.gender.value
     }
-    this._registerService.addNewUser(newUser)
+    console.log(UpdatedUser.id);
+    console.log(UpdatedUser)
+    this._registerService.updateUser(UpdatedUser.id, UpdatedUser)
       .pipe(first())
       .subscribe(
         data => {

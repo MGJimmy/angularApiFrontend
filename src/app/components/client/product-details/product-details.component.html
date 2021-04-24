@@ -1,8 +1,9 @@
 <!-- *ngIf="product != null" -->
-<section id="singleProductPage" *ngIf="product != null">
- 
-  <div class="mt-5">{{product|json}}</div>
 
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-pulse" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+
+<section id="singleProductPage" *ngIf="product != null" >
 
   <div class="container">
     <div id="singleProductContainer" class="row productsContainer">

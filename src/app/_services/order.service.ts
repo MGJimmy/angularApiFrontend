@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IOrder } from '../_models/_interfaces/IOrder';
+import { IOrderDetails } from '../_models/_interfaces/IOrderDetails';
 import { IOrderProduct } from '../_models/_interfaces/IOrderProduct';
 
 @Injectable({
@@ -29,5 +30,13 @@ export class OrderService {
     {
       return throwError(err.message ||"Internal Server error contact site adminstarator");
     }));
+  }
+  makeOrder(orderDetails:IOrderDetails){
+    let url = `${environment.apiUrl}/api/order`;
+    return this._http.post<IOrderDetails>(url, orderDetails)
+            .pipe(catchError((err)=>{
+              return throwError(err.message ||"Internal Server error contact site adminstarator");
+                }
+              ));
   }
 }
