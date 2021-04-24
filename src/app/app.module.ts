@@ -32,6 +32,7 @@ import { CheckoutComponent } from './components/client/checkout/checkout.compone
 import { SearchResultsComponent } from './components/client/search-results/search-results.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { SettingComponent } from './components/setting/setting.component';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     WishlistComponent,
     ProductDetailsComponent,
     CheckoutComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    SettingComponent
   ],
   imports: [
     BrowserModule,

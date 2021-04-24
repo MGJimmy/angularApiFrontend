@@ -17,11 +17,13 @@ import { UsersComponent } from './components/dashboard/users/users.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { RegisterComponent } from './components/register/register.component';
+import { SettingComponent } from './components/setting/setting.component';
 import { AuthGuard } from './_helpers/auth.guard';
 
 const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path:'register', component: RegisterComponent},
+  {path:'setting' , component: SettingComponent},
   {
     path:'dashboard',
     component:DashboardComponent,
