@@ -37,7 +37,8 @@ export class ShopComponent implements OnInit {
     private _colorService:ColorService,
     private _cartService:CartService,
     private _wishlistService:WishlistService,
-    private _route:ActivatedRoute) { 
+    private _route:ActivatedRoute,
+    private _router:Router) { 
 
       this._route
       .queryParams
@@ -119,7 +120,8 @@ export class ShopComponent implements OnInit {
         alert("added to cart")
       },
       error=>{
-        alert("ERROR: failed to add to cart")
+        alert("Login to add product to cart");
+        this._router.navigate(['/login']);
       }
     )
   }
@@ -129,7 +131,8 @@ export class ShopComponent implements OnInit {
         alert("added to wishlist")
       },
       error=>{
-        alert("ERROR: failed to add to wishlist")
+        alert("Login to add product to wishlist");
+        this._router.navigate(['/login']);
       }
     )
   }

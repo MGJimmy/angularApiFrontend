@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserRoles } from 'src/app/_models/_enums/UserRoles';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 @Component({
   selector: 'app-client-header',
@@ -8,7 +10,9 @@ import { Router } from '@angular/router';
 })
 export class ClientHeaderComponent implements OnInit {
   openSearch:boolean = false;
-  constructor(private _router:Router) { }
+  isLoggedIn:boolean = false;
+  constructor(private _router:Router, 
+    private _authenticationService:AuthenticationService) { }
 
   ngOnInit(): void {
   }
@@ -21,5 +25,14 @@ export class ClientHeaderComponent implements OnInit {
   goToSearchPage(searchKey){
     this._router.navigate([`/search-results/${searchKey}`])
   }
-
+  isUserLoggedIn():boolean{
+    return this._authenticationService.isLoggedIn();
+  }
+  isUserAdmin():boolean{
+    let role = this._authenticationService.getRole();
+    return (role == UserRoles.Admin) ? true : false
+  }
+  logoutUser(){
+    this._authenticationService.logout();
+  }
 }

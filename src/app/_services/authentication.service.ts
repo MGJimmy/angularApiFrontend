@@ -11,7 +11,6 @@ import { User } from '../_models/_classes/user';
 export class AuthenticationService {
     private userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
-
     constructor(
         private router: Router,
         private http: HttpClient
@@ -47,12 +46,43 @@ export class AuthenticationService {
     }
     
     public isLoggedIn() {
-        return localStorage.getItem('token') != null ? true : false;
+        if(localStorage.getItem('token')){
+            let token = localStorage.getItem('token');
+
+            let jwtData = token.split('.')[1]
+
+            let decodedJwtJsonData = window.atob(jwtData)
+
+            let decodedJwtData = JSON.parse(decodedJwtJsonData)
+        
+            let expirationDateInMills = decodedJwtData.exp * 1000;
+
+            let todayDateInMills = new Date().getTime();
+
+            if (expirationDateInMills >= todayDateInMills)
+                return true;
+   
+        }
+        return false;
     }
 
     isLoggedOut() {
         return !this.isLoggedIn();
     }
+    getRole():string {
+        if(localStorage.getItem('token')){
+            let token = localStorage.getItem('token');
+
+            let jwtData = token.split('.')[1]
+
+            let decodedJwtJsonData = window.atob(jwtData)
+
+            let decodedJwtData = JSON.parse(decodedJwtJsonData)
+            return decodedJwtData.role;
+        }
+        return "No Role";
+      }
+
     /*          
     public isLoggedIn() {
         return moment().isBefore(this.getExpiration());

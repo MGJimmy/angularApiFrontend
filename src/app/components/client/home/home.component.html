@@ -75,7 +75,7 @@
         </div>
         <div class="content position-relative w-50 text-capitalize">
           <p class="font-weight-bold">{{category.name}}</p>
-          <a class="py-2" routerLink="/shop" [queryParams]="{ category: category.id}" data-page="page02">shop {{category.name}}</a>
+          <a class="py-2" routerLink="/shop" [queryParams]="{ categoryId: category.id}">shop {{category.name}}</a>
         </div>             
       </div>
     </div>
