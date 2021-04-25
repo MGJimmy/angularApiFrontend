@@ -32,31 +32,39 @@
                 <li class="nav-item px-2">
                     <a class="nav-link" routerLink="/shop">Shop</a>
                 </li>
-                <li class="nav-item px-2">
+                <li class="nav-item px-2" *ngIf="isUserLoggedIn()">
                     <a class="nav-link" routerLink="/wishlist">Wishlist</a>
                 </li>
-                <li class="nav-item px-2">
+                <li class="nav-item px-2" *ngIf="isUserLoggedIn()">
                     <a class="nav-link" routerLink="/cart">Cart</a>
                 </li>
-                <li class="nav-item px-2">
+                <li class="nav-item px-2" *ngIf="isUserAdmin()">
                     <a class="nav-link" routerLink="/dashboard">Dashboard</a>
                 </li>
-                <li class="nav-item px-2">
+                <li class="nav-item px-2" *ngIf="!isUserLoggedIn()">
+                  <a class="nav-link" routerLink="/login">Login</a>
+                </li>
+                <li class="nav-item px-2" *ngIf="!isUserLoggedIn()">
                     <a class="nav-link" routerLink="/register">Register</a>
                 </li>
-                <li class="nav-item px-2">
+                <li class="nav-item px-2" *ngIf="isUserLoggedIn()">
+                  <a class="nav-link" (click)="logoutUser()">Logout</a>
+                </li>
+                <li class="nav-item px-2" *ngIf="isUserLoggedIn()">
                     <a class="nav-link" routerLink="/setting">Setting</a>
                 </li>
             </ul>
         </div>
         <div class="nav_icons d-none d-md-block  position-relative ml-auto">
-            <i class="search_close_open fas fa-search px-2 position-relative"></i>
-            <i class="search_close_open close_icon fas fa-times position-absolute opacity_0"></i>
-            <i class="fas fa-shopping-cart px-2 border-left"></i>
+          <i *ngIf="!openSearch" class="search_close_open fas fa-search px-2 position-relative"
+          (click)="openSearchBar()"></i>
+          <i *ngIf="openSearch" class="search_close_open close_icon fas fa-times position-absolute"
+          (click)="closeSearchBar()"></i>
+          <i class="fas fa-shopping-cart px-2 border-left"></i>
 
-            <form class="search_bar form-inline my-2 my-lg-0 position-absolute">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="position-absolute rounded-circle" type="submit">
+          <form *ngIf="openSearch" class="search_bar form-inline my-2 my-lg-0 position-absolute" (ngSubmit)="goToSearchPage(searchBar.value)">
+            <input #searchBar class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="position-absolute rounded-circle" type="submit">
               <i class="fas fa-search "></i>
             </button>
             </form>

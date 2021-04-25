@@ -19,16 +19,20 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { RegisterComponent } from './components/register/register.component';
 import { SettingComponent } from './components/setting/setting.component';
 import { AuthGuard } from './_helpers/auth.guard';
+import { UserRoles } from './_models/_enums/UserRoles';
 
 const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path:'register', component: RegisterComponent},
-  {path:'setting' , component: SettingComponent},
+  {path:'setting' , component: SettingComponent, canActivate: [AuthGuard],},
   {
     path:'dashboard',
     component:DashboardComponent,
     canActivate: [AuthGuard],
     canActivateChild : [AuthGuard],
+    data:{
+      role: UserRoles.Admin
+    },
     children:[
       {path: 'categories', component: CategoriesComponent},
       {path: 'orders', component: OrderComponent},
@@ -43,10 +47,10 @@ const routes: Routes = [
     children:[
       {path: '', component: HomeComponent},
       {path: 'shop', component: ShopComponent},
-      {path: 'cart', component: CartComponent},
-      {path: 'wishlist', component: WishlistComponent},
-      {path: 'checkout', component: CheckoutComponent},
-      {path: 'search-results/:keyword', component: SearchResultsComponent},
+      {path: 'cart', component: CartComponent, canActivate: [AuthGuard],},
+      {path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard],},
+      {path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard],},
+      {path: 'search-results/:searchkeyword', component: SearchResultsComponent},
       {path: 'product-details/:id', component: ProductDetailsComponent},  
 
     ]
