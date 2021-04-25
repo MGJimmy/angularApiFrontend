@@ -1,45 +1,50 @@
 <section id="checkoutPage" class="checkoutPage">
   <div class="container">
     <h2 class="cartName text-center display-3 my-5">Checkout</h2>
-    <form id="checkoutForm" class="w-100">
+    <form  [formGroup]="paymentForm" id="checkoutForm" class="w-100">
       <div class="row">
         <div class="col-md-7">
           <h3 class="mb-3">Billing details</h3>
           
             <div class="form-group">
-              <label for="">Full name <span class="required">*</span></label>
-              <input type="text" class="form-control" placeholder="Full name" required>
+              <label for="">Card Owner Name<span class="required">*</span></label>
+              <input formControlName="cardOwnerName" type="text" class="form-control"  name="cardOwnerName" [class.is-invalid]="formFields.cardOwnerName?.invalid && formFields.cardOwnerName?.touched">
+              <div *ngIf="formFields.cardOwnerName?.invalid && formFields.cardOwnerName?.touched">
+                <small class="text-danger" *ngIf="formFields.cardOwnerName?.errors.required">User Name is required</small>
+             
+            </div>
             </div>
             <div class="form-group">
-              <label for="">Company name</label>
-              <input type="text" class="form-control" placeholder="Company name">
+              <label for="">Card Number</label>
+              <input formControlName="CardNumber" type="text" class="form-control"  name="CardNumber" [class.is-invalid]="formFields.CardNumber?.invalid && formFields.CardNumber?.touched">
+              <div *ngIf="formFields.CardNumber?.invalid && formFields.CardNumber?.touched">
+                <small class="text-danger d-block" *ngIf="formFields.CardNumber?.errors.required">User Name is required</small> 
+                <small class="text-danger d-block" *ngIf="formFields.CardNumber?.errors.minlength">minmum length Length of 16 digits</small>
+                <small class="text-danger d-block" *ngIf="formFields.CardNumber?.errors.maxlength">maximum length Length of 16 digits</small>
+                <small class="text-danger d-block" *ngIf="formFields.CardNumber?.errors.pattern">accept only numbers</small> 
+            </div>
+            </div>
+          
+            <div class="form-group">
+              <label for="">CVC <span class="required">*</span></label>
+              <input formControlName="cvc" type="text" class="form-control"  name="cvc" [class.is-invalid]="formFields.cvc?.invalid && formFields.cvc?.touched">
+              <div *ngIf="formFields.cvc?.invalid && formFields.cvc?.touched">
+                <small class="text-danger d-block" *ngIf="formFields.cvc?.errors.required">CVC is required</small> 
+                <small class="text-danger d-block" *ngIf="formFields.cvc?.errors.minlength">minmum length Length of 3 digits</small>
+                <small class="text-danger d-block" *ngIf="formFields.cvc?.errors.maxlength">maximum length Length of 3 digits</small>
+                <small class="text-danger d-block" *ngIf="formFields.cvc?.errors.pattern">accept only numbers</small> 
+            </div>
             </div>
             <div class="form-group">
-              <label for="">Country <span class="required">*</span></label>
-              <select class="form-control" required>
-                <option>Egypt</option>
-                <option>Italy</option>
-                <option>Englan</option>
-                <option>USA</option>
-                <option>France</option>
-                <option>Oman</option>
-              </select>
+              <label for="">Experation Date <span class="required">*</span></label>
+              <input formControlName="ExperationDate" type="date" class="form-control"  name="ExperationDate" [class.is-invalid]="formFields.ExperationDate?.invalid && formFields.cardOwnerName?.touched">
+              <div *ngIf="formFields.ExperationDate?.invalid && formFields.ExperationDate?.touched">
+                <small class="text-danger" *ngIf="formFields.ExperationDate?.errors.required">Experation Date  is required</small>
+             
             </div>
-            <div class="form-group">
-              <label for="">Street address <span class="required">*</span></label>
-              <input type="text" class="form-control" placeholder="Street address" required>
             </div>
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Apartment, unit etc (optional)" >
-            </div>
-            <div class="form-group">
-              <label for="">Town/City <span class="required">*</span></label>
-              <input type="text" class="form-control" placeholder="Town/City" required>
-            </div>
-            <div class="form-group">
-              <label for="">Postcode <span class="required">*</span></label>
-              <input type="text" class="form-control" placeholder="Postcode" required>
-            </div>
+         
+            <button type="button" [disabled]="paymentForm.invalid" (click)="addPayment()" class="btn btn-dark btn-lg w-100">Add Payment</button>
           
         </div>
         <div class="col-md-5">
@@ -61,6 +66,7 @@
             </tbody>
           </table>
           <button type="button" (click)="checkOut()" class="btn btn-dark btn-lg w-100">Checkout</button>
+
         </div>
       </div>
   </form>
