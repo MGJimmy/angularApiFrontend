@@ -33,6 +33,7 @@ import { SearchResultsComponent } from './components/client/search-results/searc
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SettingComponent } from './components/setting/setting.component';
+import { UserOrdersComponent } from './components/client/user-orders/user-orders.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { SettingComponent } from './components/setting/setting.component';
     ProductDetailsComponent,
     CheckoutComponent,
     SearchResultsComponent,
-    SettingComponent
+    SettingComponent,
+    UserOrdersComponent
   ],
   imports: [
     BrowserModule,

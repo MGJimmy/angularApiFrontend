@@ -54,7 +54,7 @@ export class AuthenticationService {
             let decodedJwtJsonData = window.atob(jwtData)
 
             let decodedJwtData = JSON.parse(decodedJwtJsonData)
-        
+            // console.log(decodedJwtData);
             let expirationDateInMills = decodedJwtData.exp * 1000;
 
             let todayDateInMills = new Date().getTime();
@@ -82,7 +82,20 @@ export class AuthenticationService {
         }
         return "No Role";
       }
+    getUserId(){
+        if(localStorage.getItem('token')){
+            let token = localStorage.getItem('token');
 
+            let jwtData = token.split('.')[1]
+
+            let decodedJwtJsonData = window.atob(jwtData)
+
+            let decodedJwtData = JSON.parse(decodedJwtJsonData)
+            let userID=decodedJwtData['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+            return userID;
+        }
+        return null;
+    }
     /*          
     public isLoggedIn() {
         return moment().isBefore(this.getExpiration());

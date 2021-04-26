@@ -5,5 +5,4 @@ export interface IOrder{
   applicationUserIdentity_Id:string;
   appUser:any;   //represent the the user who makes the order
 
-
 }
