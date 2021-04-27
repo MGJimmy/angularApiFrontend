@@ -38,10 +38,9 @@ export class ShopComponent implements OnInit {
     private _cartService:CartService,
     private _wishlistService:WishlistService,
     private _route:ActivatedRoute,
-    private _router:Router) { 
-
-      this._route
-      .queryParams
+    private _router:Router,) { 
+      
+      this._route.queryParams
       .subscribe(params => {
         // Defaults to 0 if no query param provided.
         //this.selectedCategoryId = this.selectedColorId = 0
@@ -121,7 +120,7 @@ export class ShopComponent implements OnInit {
       },
       error=>{
         alert("Login to add product to cart");
-        this._router.navigate(['/login']);
+        this._router.navigate(['/login'])
       }
     )
   }

@@ -53,7 +53,7 @@ const routes: Routes = [
       {path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard],},
       {path: 'search-results/:searchkeyword', component: SearchResultsComponent},
       {path: 'myorders', component: UserOrdersComponent,canActivate:[AuthGuard]},
-      {path: 'product-details/:id', component: ProductDetailsComponent},  
+      {path: 'product-details/:id', component: ProductDetailsComponent,},  
 
     ]
   },

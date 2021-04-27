@@ -54,14 +54,14 @@ export class AuthenticationService {
             let decodedJwtJsonData = window.atob(jwtData)
 
             let decodedJwtData = JSON.parse(decodedJwtJsonData)
-            // console.log(decodedJwtData);
+
             let expirationDateInMills = decodedJwtData.exp * 1000;
 
             let todayDateInMills = new Date().getTime();
 
             if (expirationDateInMills >= todayDateInMills)
                 return true;
-   
+            
         }
         return false;
     }

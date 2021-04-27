@@ -34,6 +34,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SettingComponent } from './components/setting/setting.component';
 import { UserOrdersComponent } from './components/client/user-orders/user-orders.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -74,7 +75,9 @@ import { UserOrdersComponent } from './components/client/user-orders/user-orders
     BrowserAnimationsModule,
     CarouselModule,
     NgxSpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule
+
   ],
   providers: [
    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

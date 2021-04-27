@@ -10,5 +10,4 @@ export interface IProduct {
   colorId:number,
   colorName:string;
   categoryName:string
-  
 }
