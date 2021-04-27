@@ -19,6 +19,18 @@ export class OrderService {
       return throwError(err.message ||"Internal Server error contact site adminstarator");
     }));
   }
+  getOrdersByPageForSpecficUser(userID:string,pageSize:number, pageNumber:number):Observable<IOrder[]>{
+    return this._http.get<IOrder[]>(`${this._url}/${userID}/${pageSize}/${pageNumber}`).pipe(catchError((err)=>
+    {
+      return throwError(err.message ||"Internal Server error contact site adminstarator");
+    }));
+  }
+  getOrderCountForSpecficUser(userID:string):Observable<number>{
+    return this._http.get<number>(`${this._url}/countordersforspecifcuser/${userID}`).pipe(catchError((err)=>
+    {
+      return throwError(err.message ||"Internal Server error contact site adminstarator");
+    }));
+  }
   getOrderCount():Observable<number>{
     return this._http.get<number>(`${this._url}/count`).pipe(catchError((err)=>
     {

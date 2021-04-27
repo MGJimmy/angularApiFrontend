@@ -5,11 +5,12 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
 import { OrderService } from 'src/app/_services/order.service';
 
 @Component({
-  selector: 'app-order',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss']
+  selector: 'app-user-orders',
+  templateUrl: './user-orders.component.html',
+  styleUrls: ['./user-orders.component.scss']
 })
-export class OrderComponent implements OnInit {
+export class UserOrdersComponent implements OnInit {
+
   allOrders:IOrder[]; 
   orderDetailsList:IOrderProduct[]; 
   constructor(private _orderAppSeriv:OrderService, private authenticationService: AuthenticationService) { }
@@ -18,9 +19,14 @@ export class OrderComponent implements OnInit {
   errorMsg:string;
   OrdersCount:number;
   numberOfPages:number;
+  userID:string;
+
   ngOnInit(): void {
 
-    this._orderAppSeriv.getOrderCount().subscribe(
+    this.userID=this.authenticationService.getUserId();
+      
+     
+    this._orderAppSeriv.getOrderCountForSpecficUser(this.userID).subscribe(
       data => {
         this.OrdersCount = data
         this.numberOfPages = Math.ceil(this.OrdersCount / this.pageSize)
@@ -35,7 +41,7 @@ export class OrderComponent implements OnInit {
     return new Array(i);
   }
   getSelectedPage(currentPageNumber:number){
-    this._orderAppSeriv.getOrdersByPage(this.pageSize,currentPageNumber).subscribe(
+    this._orderAppSeriv.getOrdersByPageForSpecficUser(this.userID,this.pageSize,currentPageNumber).subscribe(
       data => {
         this.allOrders = data
         this.currentPageNumber = currentPageNumber;
@@ -46,7 +52,6 @@ export class OrderComponent implements OnInit {
       }
     ) 
   }
-  //
   orderDetails(id:number){
     this._orderAppSeriv.orderDetails(id).subscribe(
       data => {

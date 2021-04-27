@@ -7,6 +7,7 @@ import { HomeComponent } from './components/client/home/home.component';
 import { ProductDetailsComponent } from './components/client/product-details/product-details.component';
 import { SearchResultsComponent } from './components/client/search-results/search-results.component';
 import { ShopComponent } from './components/client/shop/shop.component';
+import { UserOrdersComponent } from './components/client/user-orders/user-orders.component';
 import { WishlistComponent } from './components/client/wishlist/wishlist.component';
 import { CategoriesComponent } from './components/dashboard/categories/categories.component';
 import { ColorsComponent } from './components/dashboard/colors/colors.component';
@@ -51,6 +52,7 @@ const routes: Routes = [
       {path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard],},
       {path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard],},
       {path: 'search-results/:searchkeyword', component: SearchResultsComponent},
+      {path: 'myorders', component: UserOrdersComponent,canActivate:[AuthGuard]},
       {path: 'product-details/:id', component: ProductDetailsComponent},  
 
     ]
