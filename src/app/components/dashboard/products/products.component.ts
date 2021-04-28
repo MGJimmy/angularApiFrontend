@@ -2,10 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
-import { Product } from 'src/app/_models/_classes/Product';
 import { ICategory } from 'src/app/_models/_interfaces/ICategory';
 import { IColor } from 'src/app/_models/_interfaces/IColor';
 import { IProduct } from 'src/app/_models/_interfaces/IProduct';
+import { IProductVM } from 'src/app/_models/_interfaces/IProductVM';
 import { CategoryService } from 'src/app/_services/category.service';
 import { ColorService } from 'src/app/_services/color.service';
 import { ProductService } from 'src/app/_services/product.service';
@@ -21,7 +21,7 @@ export class ProductsComponent implements OnInit {
   @ViewChild('addOrUpdateModelCloseBtn') addOrUpdateModelCloseBtn;
   @ViewChild(ConfirmModalComponent) confirmModal:ConfirmModalComponent;
   private _ProductToUpdate:IProduct;
-  allProducts:Product[];
+  allProducts:IProductVM[];
   allcColors:IColor[];
   allCategories:ICategory[];
   errorMsg:string;
@@ -108,8 +108,6 @@ export class ProductsComponent implements OnInit {
       quantity: this.formFields.quantity.value,
       categoryId: this.formFields.categoryId.value,
       colorId: this.formFields.colorId.value,
-      categoryName:" ", //this will be changed for 
-      colorName:" "    //this will changed also
     };
     this._productService.addNewProduct(newProduct)
         .pipe(first())

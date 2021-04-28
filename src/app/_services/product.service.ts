@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Product } from '../_models/_classes/Product';
 import { IProduct } from '../_models/_interfaces/IProduct';
+import { IProductVM } from '../_models/_interfaces/IProductVM';
 
 @Injectable({
   providedIn: 'root'
@@ -13,21 +13,21 @@ export class ProductService {
 
   constructor(private _http: HttpClient) { }
 
-  getAllProducts(): Observable<IProduct[]> {
+  getAllProducts(): Observable<IProductVM[]> {
     let url = `${environment.apiUrl}/api/product`;
-    return this._http.get<IProduct[]>(url).pipe(catchError((err) => {
+    return this._http.get<IProductVM[]>(url).pipe(catchError((err) => {
       return throwError(err.message || "Internal Server error contact site adminstarator");
     }));
   }
-  getNewArrivalsProducts(numberOfProducts:number): Observable<IProduct[]> {
+  getNewArrivalsProducts(numberOfProducts:number): Observable<IProductVM[]> {
     let url = `${environment.apiUrl}/api/product/newArrivals/${numberOfProducts}`;
-    return this._http.get<IProduct[]>(url).pipe(catchError((err) => {
+    return this._http.get<IProductVM[]>(url).pipe(catchError((err) => {
       return throwError(err.message || "Internal Server error contact site adminstarator");
     }));
   }
-  getProductById(id: number): Observable<IProduct> {
+  getProductById(id: number): Observable<IProductVM> {
     let url = `${environment.apiUrl}/api/product/${id}`;
-    return this._http.get<IProduct>(url).pipe(catchError((err) => {
+    return this._http.get<IProductVM>(url).pipe(catchError((err) => {
       return throwError(err.message || "Internal Server error contact site adminstarator");
     }));
   }
@@ -65,33 +65,33 @@ export class ProductService {
       return throwError(err.message || "Internal Server error contact site adminstarator");
     }));
   }
-  getProductsByPage(pageSize: number, pageNumber: number): Observable<Product[]> {
+  getProductsByPage(pageSize: number, pageNumber: number): Observable<IProductVM[]> {
     let url = `${environment.apiUrl}/api/product/${pageSize}/${pageNumber}`;
-    return this._http.get<Product[]>(url).pipe(catchError((err) => {
+    return this._http.get<IProductVM[]>(url).pipe(catchError((err) => {
       return throwError(err.message || "Internal Server error contact site adminstarator");
     }));
   }
-  getProductsByCategoryPaging(categoryId:number, pageSize: number, pageNumber: number): Observable<Product[]> {
+  getProductsByCategoryPaging(categoryId:number, pageSize: number, pageNumber: number): Observable<IProductVM[]> {
     let url = `${environment.apiUrl}/api/product/category/${categoryId}/${pageSize}/${pageNumber}`;
-    return this._http.get<Product[]>(url).pipe(catchError((err) => {
+    return this._http.get<IProductVM[]>(url).pipe(catchError((err) => {
       return throwError(err.message || "Internal Server error contact site adminstarator");
     }));
   }
-  getProductsByColorPaging(colorId:number, pageSize: number, pageNumber: number): Observable<Product[]> {
+  getProductsByColorPaging(colorId:number, pageSize: number, pageNumber: number): Observable<IProductVM[]> {
     let url = `${environment.apiUrl}/api/product/color/${colorId}/${pageSize}/${pageNumber}`;
-    return this._http.get<Product[]>(url).pipe(catchError((err) => {
+    return this._http.get<IProductVM[]>(url).pipe(catchError((err) => {
       return throwError(err.message || "Internal Server error contact site adminstarator");
     }));
   }
-  getProductsBySearch(searchKeyWord:string): Observable<Product[]> {
+  getProductsBySearch(searchKeyWord:string): Observable<IProductVM[]> {
     let url = `${environment.apiUrl}/api/product/search/${searchKeyWord}`;
-    return this._http.get<Product[]>(url).pipe(catchError((err) => {
+    return this._http.get<IProductVM[]>(url).pipe(catchError((err) => {
       return throwError(err.message || "Internal Server error contact site adminstarator");
     }));
   }
-  getRandomRelatedProducts(categoryId:number, numberOfProducts:number): Observable<Product[]> {
+  getRandomRelatedProducts(categoryId:number, numberOfProducts:number): Observable<IProductVM[]> {
     let url = `${environment.apiUrl}/api/product/relatedProducts/${categoryId}/${numberOfProducts}`;
-    return this._http.get<Product[]>(url).pipe(catchError((err) => {
+    return this._http.get<IProductVM[]>(url).pipe(catchError((err) => {
       return throwError(err.message || "Internal Server error contact site adminstarator");
     }));
   }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ICategory } from 'src/app/_models/_interfaces/ICategory';
-import { IProduct } from 'src/app/_models/_interfaces/IProduct';
+import { IProductVM } from 'src/app/_models/_interfaces/IProductVM';
 import { CategoryService } from 'src/app/_services/category.service';
 import { ProductService } from 'src/app/_services/product.service';
 import { environment } from 'src/environments/environment';
@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  newArrivalsProducts:IProduct[];
+  newArrivalsProducts:IProductVM[];
   categories:ICategory[];
   errorMsg:string;
   constructor( private _productService:ProductService,private _categoryService:CategoryService,private _router:Router) { }

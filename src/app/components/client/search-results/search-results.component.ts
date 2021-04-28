@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { error } from 'protractor';
-import { Product } from 'src/app/_models/_classes/Product';
+import { IProductVM } from 'src/app/_models/_interfaces/IProductVM';
 import { CartService } from 'src/app/_services/cart.service';
 import { ProductService } from 'src/app/_services/product.service';
 import { WishlistService } from 'src/app/_services/wishlist.service';
@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SearchResultsComponent implements OnInit {
   searchKey:string;
-  searchedProducts:Product[];
+  searchedProducts:IProductVM[];
   errorMsg:string;
   constructor(private _route:ActivatedRoute,
     private _productService:ProductService,

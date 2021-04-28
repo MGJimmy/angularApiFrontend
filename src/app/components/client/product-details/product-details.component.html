@@ -30,7 +30,7 @@
         <div class="form-group my-3">
           <div class="rating">
             <ngb-rating [(rate)]="loggedUserRating" [max]="5" 
-            class="star"></ngb-rating>
+            class="addRate"></ngb-rating>
             <hr>
           </div>
             <textarea formControlName="comment" class="form-control comment" placeholder="Leave comment" name="comment"
@@ -106,14 +106,8 @@
             </div>
 
             <div class="details">
-              <div class="rating">
-                <span><i class="fas fa-star fa-xs text-secondary"></i></span>
-                <span><i class="fas fa-star fa-xs text-secondary"></i></span>
-                <span><i class="fas fa-star fa-xs text-secondary"></i></span>
-                <span><i class="fas fa-star fa-xs text-secondary"></i></span>
-                <span><i class="fas fa-star fa-xs text-secondary"></i></span>
-              </div>
               <p class="name my-0 text-secondary"> {{product.name}} </p>
+              <ngb-rating [(rate)]="product.averageRating" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
               <p class="name my-0 text-secondary">
                 <i class="fas fa-tag"></i> {{product.categoryName}}
               </p>
@@ -186,3 +180,10 @@
     </div>
   </div>
 </section>
+
+<!-- rating star template -->
+<ng-template #t let-fill="fill">
+  <span class="star" [class.full]="fill === 100">
+    <span class="half" [style.width.%]="fill"><i class="fas fa-star fa-xs"></i></span><i class="fas fa-star fa-xs"></i>
+  </span>
+</ng-template>

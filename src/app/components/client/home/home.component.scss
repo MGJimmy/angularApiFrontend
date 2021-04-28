@@ -94,3 +94,20 @@
 .services .box:hover {box-shadow: 10px 10px 10px;}
 
 /*************** End services *****************/
+
+// rating
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 1.2rem;
+  color: #d3d3d3;
+}
+.full {
+  color: #ffc107 ;
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: #ffc107 ;
+}

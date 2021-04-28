@@ -43,7 +43,11 @@
         <div class="ad">
           <div class="image"><img class="w-100"  [src]="createImgPath(product.image)"></div>
           <div class="text text-uppercase">
-            <p class="w-50 mx-auto mt-4" > {{product.name}} </p>
+            <p class="w-50 mx-auto mt-4 productName" > {{product.name}} </p>
+
+            <ngb-rating [(rate)]="product.averageRating" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+
+            <p class="w-50 mx-auto mt-1 ProductCategory" > <i class="fas fa-tag"></i> {{product.categoryName}} </p>
             <p class="price">{{product.price}} $</p>
           </div>
         </div>
@@ -58,7 +62,7 @@
 
 
 <!---------------- Start Categories   ----------------->
-<div class="sections">
+<div class="sections categories">
   <div class="title text-center">
     <h2 class="my_h text-uppercase font-weight-bold">choose your section</h2>
     <p class="my_p mx-auto mb-5"> The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested  It uses a dictionary of over 200 Latin words, combined</p>
@@ -148,3 +152,10 @@
   </div>
 </div>
 
+<!-- rating star template -->
+<ng-template #t let-fill="fill">
+  <span class="star" [class.full]="fill === 100">
+    <span class="half" [style.width.%]="fill"><i class="fas fa-star fa-xs"></i></span><i class="fas fa-star fa-xs"></i>
+  </span>
+</ng-template>
+<!-- <ngb-rating [(rate)]="product.averageRating" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating> -->

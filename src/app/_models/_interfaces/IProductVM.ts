@@ -1,4 +1,4 @@
-export interface IProduct {
+export interface IProductVM {
   id:number,
   name:string,
   price:number,
@@ -8,4 +8,7 @@ export interface IProduct {
   quantity:number,
   categoryId:number,
   colorId:number,
+  colorName:string;
+  categoryName:string
+  averageRating:number;
 }

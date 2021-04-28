@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { error } from 'protractor';
-import { Product } from 'src/app/_models/_classes/Product';
 import { ICategory } from 'src/app/_models/_interfaces/ICategory';
 import { IColor } from 'src/app/_models/_interfaces/IColor';
+import { IProductVM } from 'src/app/_models/_interfaces/IProductVM';
 import { CartService } from 'src/app/_services/cart.service';
 import { CategoryService } from 'src/app/_services/category.service';
 import { ColorService } from 'src/app/_services/color.service';
@@ -20,7 +20,7 @@ export class ShopComponent implements OnInit {
   errorMsg:string;
   allCategories:ICategory[];
   allColors:IColor[];
-  productsPerPage:Product[];
+  productsPerPage:IProductVM[];
   pageSize:number = 2;
   productsCount:number;
   currentPageNumber:number = 1;

@@ -14,9 +14,25 @@ textarea.comment {
 .user-img {
   margin-top: 4px
 }
-.star {
+.addRate {
   font-size: 1.5rem;
   color: #ffc107;
+}
+// rating
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 1.2rem;
+  color: #d3d3d3;
+}
+.full {
+  color: #ffc107 ;
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: #ffc107 ;
 }
 
 

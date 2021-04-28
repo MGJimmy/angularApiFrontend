@@ -13,14 +13,8 @@
         </div>
         
         <div class="details">
-          <div class="rating">
-           <span><i class="fas fa-star fa-xs text-secondary"></i></span>
-           <span><i class="fas fa-star fa-xs text-secondary"></i></span>
-           <span><i class="fas fa-star fa-xs text-secondary"></i></span>
-           <span><i class="fas fa-star fa-xs text-secondary"></i></span>
-           <span><i class="fas fa-star fa-xs text-secondary"></i></span>
-          </div>
           <p class="name my-0 text-secondary"> {{product.name}} </p>
+          <ngb-rating [(rate)]="product.averageRating" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
           <p class="name my-0 text-secondary"> 
             <i class="fas fa-tag"></i> {{product.categoryName}} 
           </p>
@@ -45,3 +39,9 @@
     <!-- End if there's no result -->
   </div>
 </section>
+
+<ng-template #t let-fill="fill">
+  <span class="star" [class.full]="fill === 100">
+    <span class="half" [style.width.%]="fill"><i class="fas fa-star fa-xs"></i></span><i class="fas fa-star fa-xs"></i>
+  </span>
+</ng-template>
