@@ -35,6 +35,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { SettingComponent } from './components/setting/setting.component';
 import { UserOrdersComponent } from './components/client/user-orders/user-orders.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MiniCartComponent } from './components/client/mini-cart/mini-cart.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CheckoutComponent,
     SearchResultsComponent,
     SettingComponent,
-    UserOrdersComponent
+    UserOrdersComponent,
+    MiniCartComponent
   ],
   imports: [
     BrowserModule,

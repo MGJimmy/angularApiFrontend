@@ -11,8 +11,9 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
 export class ClientHeaderComponent implements OnInit {
   openSearch:boolean = false;
   isLoggedIn:boolean = false;
+  showMiniCart : boolean = false;
   constructor(private _router:Router, 
-    private _authenticationService:AuthenticationService) { }
+    private _authenticationService:AuthenticationService ) { }
 
   ngOnInit(): void {
   }
