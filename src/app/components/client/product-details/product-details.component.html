@@ -5,50 +5,49 @@
   <p style="color: white"> Loading... </p>
 </ngx-spinner>
 
-<section id="singleProductPage" *ngIf="product != null">
-
+<section id="singleProductPage" class="pt-5 mt-5" *ngIf="product != null">
   <div class="container">
-    <div id="singleProductContainer" class="row productsContainer">
+    <div id="singleProductContainer mb-5" class="row productsContainer">
       <div class="col-md-6"><img [src]="createImgPath(product.image)" class="w-100"></div>
       <div class="col-md-6">
         <h2 class="my-3 display-3">{{product.name }} </h2>
-        <div class="my-3 font-italic h2">{{product.price}} </div>
-        <div class="my-3 font-italic h2">{{product.categoryName}} </div>
-        <div class="description my-3">{{product.description}} </div>
+        <div class="my-3 h5">
+          <span class="font-weight-bold">Price : </span> 
+          <span class="text-danger">{{product.price|currency}} </span>
+        </div>
+        <div class="my-3 h5"><span class="font-weight-bold">Category : </span> {{product.categoryName}} </div>
+        <div class="description my-3 h5 "><span class="font-weight-bold">Description : </span> {{product.description}} </div>
 
-        <div class="colors my-3"><span class="font-weight-bold">Color : </span>{{product.colorName}} </div>
-        <button type="button" class="addToChart  btn btn-primary my-3 mr-3" data-id=" product.id "><i
-            class="fa fa-cart-plus"></i> Add to Cart</button>
-        <button type="button" class="addedToChart  btn btn-success my-3 mr-3" data-id=" product.id "><i
-            class="fas fa-check"></i> Added to Cart</button>
-        <button type="button" class="addToWishList  btn btn-secondary my-3" data-id=" product.id "><i
-            class="fa fa-heart" aria-hidden="true"></i> Add to WishList</button>
+        <div class="colors my-3 h5"><span class="font-weight-bold">Color : </span>{{product.colorName}} </div>
+        <button type="button" class="addToChart  btn btn-secondary my-3 mr-3"
+        (click)="addProductToCart(product.id)">
+          <i class="fa fa-cart-plus"></i> Add to Cart
+        </button>
+        <button type="button" class="addToWishList  btn btn-danger my-3"
+        (click)="addProductToWishlist(product.id)">
+          <i class="fa fa-heart" aria-hidden="true"></i> Add to WishList
+        </button>
       </div>
     </div>
-    <div class="reviewsAndRelatedProducts">
-      <form [formGroup]="addReviewForm" class="addReviewForm" *ngIf="!hasReview">
+    <hr>
+    <div class="reviewsAndRelatedProducts mt-5">
+      <form [formGroup]="addReviewForm" class="ReviewForm" *ngIf="!hasReview">
         <div class="form-group my-3">
           <div class="rating">
             <ngb-rating [(rate)]="loggedUserRating" [max]="5" 
-            class="addRate"></ngb-rating>
-            <hr>
+            class="starInput"></ngb-rating>
           </div>
             <textarea formControlName="comment" class="form-control comment" placeholder="Leave comment" name="comment"
               rows="5"></textarea>
-            <!-- <div *ngIf="userName?.invalid && userName?.touched"> 
-                    <small *ngIf="userName?.errors?.required" class="text-danger">user name is required</small>
-                    <small *ngIf="userName?.errors?.pattern" class="text-danger">user name must be character only</small>
-                </div> -->
             <button type="submit" class="btn btn-primary my-3 px-5" [disabled]="loading"
             (click)="addReview()"> Add</button>
           </div>
       </form>
-      <form [formGroup]="updateReviewForm" class="addReviewForm" *ngIf="hasReview && needUpdate">
+      <form [formGroup]="updateReviewForm" class="ReviewForm" *ngIf="hasReview && needUpdate">
         <div class="form-group my-3">
           <div class="rating">
             <ngb-rating [(rate)]="loggedUserRating" [max]="5" 
-            class="star"></ngb-rating>
-            <hr>
+            class="starInput"></ngb-rating>
           </div>
             <textarea formControlName="comment" class="form-control comment" placeholder="Leave comment" name="comment"
               rows="5"></textarea>
@@ -91,12 +90,12 @@
 
       </div>
       <div class=" products relatedProducts col-md-9">
-        <h2 class="mb-3"> Related products </h2>
+        <h2 class="mb-3 py-2 px-4 bg-dark d-inline-block text-white"> Related products </h2>
         <div class="row">
           <!-- foreach product  -->
           <div class="col-md-4 box mb-4" *ngFor="let product of relatedProducts">
 
-            <div class="image position-relative overflow-hidden">
+            <div class="image position-relative overflow-hidden productImgWrapper">
               <a routerLink="/product-details/{{ product.id }}">
                 <img class="w-100" [src]="createImgPath(product.image)" alt="img1">
                 <img class="top w-100 position-absolute" [src]="createImgPath(product.image)" alt="img1">
@@ -123,7 +122,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
       <div class="my-5 othersReviews">
@@ -157,7 +155,7 @@
         </div>
       </div>
       <!-- pagination -->
-      <nav aria-label="..." class="">
+      <!-- <nav aria-label="..." class="">
         <div class="d-inline-block">
           <ul class="pagination">
             <li class="page-item" [ngClass]="{disabled:currentPageNumber <=1, cursorNotAllowed:currentPageNumber <=1}">
@@ -176,7 +174,7 @@
           </ul>
         </div>
         <div class="float-right h5 mr-4 text-secondary">Showing {{currentPageNumber}} of {{numberOfPages}}</div>
-      </nav>
+      </nav> -->
     </div>
   </div>
 </section>
