@@ -14,19 +14,17 @@
                     <th scope="col"><i class="fas fa-trash-alt"></i></th>
                 </tr>
             </thead>
-            <tbody  id="cartBody" *ngFor="let product of products;let i=index">
+            <tbody id="cartBody" *ngFor="let productCart of productsCart;let i=index">
                 <!-- foreach  cartproduct -->
                 <tr data-id=" value.id ">
-                    <td scope="row" class="image"><img class="w-100" [src]="product.image"></td>
-                    <td class="align-middle">{{product.name}}</td>
-                    <td class="cartItemPrice align-middle">{{product.price}}</td>
-                    <td class="align-middle"> 
-                        <input (change)="quantityChanged(productQuantity.value,product.id)" 
-                        type="number" #productQuantity class="itemQuantity" value="1"
-                        min="1" max={{product.quantity}} onkeydown="return false"> 
+                    <td scope="row" class="image"><img class="w-100" [src]="productCart.productImage"></td>
+                    <td class="align-middle">{{productCart.productName}}</td>
+                    <td class="cartItemPrice align-middle">{{productCart.productPrice}}</td>
+                    <td class="align-middle">
+                        <input (change)="quantityChanged(productQuantity.value,productCart.productId)" type="number" #productQuantity class="itemQuantity" value="1" min="1" max={{productCart.productQuantity}} onkeydown="return false">
                     </td>
-                    <td class="itemTotPriceDiv align-middle">{{computerTotalProductPrice(product.id)}}</td>
-                    <td class="itemTotPriceDiv align-middle">{{computerTotalProductPriceAfterDiscount(product.id)}}</td>
+                    <td class="itemTotPriceDiv align-middle">{{computeTotalProductPrice(productCart.productId)}}</td>
+                    <td class="itemTotPriceDiv align-middle">{{computeTotalProductPriceAfterDiscount(productCart.productId)}}</td>
                     <td id="deleteItem" class="align-middle deleteItem"><i class="fas fa-trash-alt"></i></td>
                 </tr>
             </tbody>

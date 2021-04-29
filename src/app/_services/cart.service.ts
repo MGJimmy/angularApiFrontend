@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { IProduct } from '../_models/_interfaces/IProduct';
+import { IProductCartVM } from '../_models/_interfaces/IProductCartVM';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,9 @@ export class CartService {
 
   constructor(private _http: HttpClient) { }
 
-  getAll(): Observable<IProduct[]> {
+  getAll(): Observable<IProductCartVM[]> {
     let url = `${environment.apiUrl}/api/cart`;
-    return this._http.get<IProduct[]>(url).pipe(catchError((err) => {
+    return this._http.get<IProductCartVM[]>(url).pipe(catchError((err) => {
       return throwError(err.message || "Internal Server error contact site adminstarator");
     }));
   }
