@@ -45,7 +45,9 @@ export class ShopComponent implements OnInit {
         // Defaults to 0 if no query param provided.
         //this.selectedCategoryId = this.selectedColorId = 0
         this.selectedCategoryId = params['categoryId'] || 0;
+        this.selectedCategoryName = params['categoryName'] || this.selectedCategoryName;
         this.selectedColorId = params['colorId'] || 0;
+        this.selectedColorName = params['colorName'] || this.selectedColorName;
         this.changePagetTitle();
         this.getSelectedPage(1); 
 

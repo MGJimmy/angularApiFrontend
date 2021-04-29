@@ -42,7 +42,7 @@
       <div class="slide" (click)="navigateToProductDetails(product.id)">
         <div class="ad">
           <div class="image"><img class="w-100"  [src]="createImgPath(product.image)"></div>
-          <div class="text text-uppercase">
+          <div class="text">
             <p class="w-50 mx-auto mt-4 productName" > {{product.name}} </p>
 
             <ngb-rating [(rate)]="product.averageRating" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
@@ -79,7 +79,7 @@
         </div>
         <div class="content position-relative w-50 text-capitalize">
           <p class="font-weight-bold">{{category.name}}</p>
-          <a class="py-2" routerLink="/shop" [queryParams]="{ categoryId: category.id}">shop {{category.name}}</a>
+          <a class="py-2" routerLink="/shop" [queryParams]="{ categoryId: category.id, categoryName: category.name}">shop {{category.name}}</a>
         </div>             
       </div>
     </div>
@@ -158,4 +158,3 @@
     <span class="half" [style.width.%]="fill"><i class="fas fa-star fa-xs"></i></span><i class="fas fa-star fa-xs"></i>
   </span>
 </ng-template>
-<!-- <ngb-rating [(rate)]="product.averageRating" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating> -->

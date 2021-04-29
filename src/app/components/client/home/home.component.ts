@@ -53,19 +53,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //get latest number of products
-    this._productService.getNewArrivalsProducts(3).subscribe(
-      data => {
-        this.newArrivalsProducts = data
-        console.log(this.newArrivalsProducts);
-      },
-      error=>
-      {
-       this.errorMsg = error;
-      }
-    ) 
-
-    //get all categories
+    this.getNewArrivalsProducts(10);
+    this.getAllCategories();
+  }
+  private getAllCategories():void{
     this._categoryService.getAllCategories().subscribe(
       data => {
         this.categories = data
@@ -76,7 +67,19 @@ export class HomeComponent implements OnInit {
        this.errorMsg = error;
       }
     )
-
+  }
+  private getNewArrivalsProducts(numberOfProducts:number):void{
+    this._productService.getNewArrivalsProducts(numberOfProducts).subscribe(
+      data => {
+        this.newArrivalsProducts = data
+        console.log(this.newArrivalsProducts);
+      },
+      error=>
+      {
+       this.errorMsg = error;
+      }
+    ) 
+    
   }
 
   public createImgPath = (serverPath: string) => {

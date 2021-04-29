@@ -15,6 +15,7 @@ import { ConfirmModalComponent } from '../../_reusableComponents/confirm-modal/c
 export class CategoriesComponent implements OnInit {
   @ViewChild('addOrUpdateModelCloseBtn') addOrUpdateModelCloseBtn;
   @ViewChild(ConfirmModalComponent) confirmModal:ConfirmModalComponent;
+  hasCategories:boolean = false;
   private _categoryToUpdate:ICategory;
   allCategories:ICategory[]; 
   errorMsg:string;
@@ -35,23 +36,26 @@ export class CategoriesComponent implements OnInit {
     private _router:Router) { }
 
   ngOnInit(): void {
-    this._categoryService.getCategoriesCount().subscribe(
-      data => {
-        this.categoriesCount = data
-        this.numberOfPages = Math.ceil(this.categoriesCount / this.pageSize)
-      },
-      error=>
-      {
-       this.errorMsg = error;
-      }
-    ) 
-    
+    this.getCategoriesCount();
     this.categoryForm = this._formBuilder.group({
       name:['', Validators.required]
     });
     this.getSelectedPage(1);
   }
 
+  private getCategoriesCount(){
+    this._categoryService.getCategoriesCount().subscribe(
+      data => {
+        this.categoriesCount = data
+        this.numberOfPages = Math.ceil(this.categoriesCount / this.pageSize)
+        
+      },
+      error=>
+      {
+       this.errorMsg = error;
+      }
+    ) 
+  }
   private onAddCategorySubmit() {
     this.submitted = true;
 
@@ -159,6 +163,11 @@ export class CategoriesComponent implements OnInit {
       data => {
         this.allCategories = data
         this.currentPageNumber = currentPageNumber;
+        if(data.length != 0)
+          this.hasCategories = true;
+        else
+          this.hasCategories = false;
+
       },
       error=>
       {

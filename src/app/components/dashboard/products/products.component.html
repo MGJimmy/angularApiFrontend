@@ -3,7 +3,7 @@
 <button class="btn btn-primary mb-2 dBAddNewBtn" data-toggle="modal" data-target="#addAndUpdateModel" (click)="openAddProductModal()">
   New
 </button>
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover" *ngIf="hasProducts">
     <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
@@ -26,7 +26,9 @@
             <td>{{ product.description }}</td>
             <td>{{ product.discount }}%</td>
             <td>
-                <img class="img-thumbnail img-fluid" [src]="createImgPath(product.image)" alt="category image">
+                <div class="dashboardImgWrapper">
+                    <img class="img-thumbnail img-fluid w-100" [src]="createImgPath(product.image)" alt="category image">
+                </div>
             </td>
             <td>{{ product.quantity }}</td>
             <td>{{ product.categoryName }}</td>
@@ -39,7 +41,7 @@
     </tbody>
 </table>
 <!-- pagination -->
-<nav aria-label="...">
+<nav aria-label="..." *ngIf="hasProducts">
     <div class="d-inline-block">
         <ul class="pagination">
             <li class="page-item" [ngClass]="{disabled:currentPageNumber <=1, cursorNotAllowed:currentPageNumber <=1}">
@@ -55,6 +57,12 @@
     </div>
     <div class="float-right h5 mr-4 text-secondary">Showing {{currentPageNumber}} of {{numberOfPages}}</div>
 </nav>
+<!-- no items to show alert -->
+<div class="row" *ngIf="!hasProducts">
+    <div class="text-center alert alert-danger col-9 mx-auto">
+        There's no orders to show
+    </div>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="addAndUpdateModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -77,13 +85,13 @@
                         <input formControlName="description" type="text" class="form-control" placeholder="description" name="description" [class.is-invalid]="formFields.description?.invalid && formFields.description?.touched">
                     </div>
                     <div class="form-group my-3">
-                        <input formControlName="discount" type="text" class="form-control" placeholder="discount" name="discount" [class.is-invalid]="formFields.discount?.invalid && formFields.discount?.touched">
+                        <input formControlName="discount" type="number" class="form-control" placeholder="discount" name="discount" [class.is-invalid]="formFields.discount?.invalid && formFields.discount?.touched">
                     </div>
                     <div class="form-group my-3">
                         <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
                     </div>
                     <div class="form-group my-3">
-                        <input formControlName="quantity" type="text" class="form-control" placeholder="quantity" name="quantity" [class.is-invalid]="formFields.quantity?.invalid && formFields.quantity?.touched">
+                        <input formControlName="quantity" type="number" class="form-control" placeholder="quantity" name="quantity" [class.is-invalid]="formFields.quantity?.invalid && formFields.quantity?.touched">
                     </div>
            
 

@@ -12,6 +12,7 @@ import { OrderService } from 'src/app/_services/order.service';
 export class OrderComponent implements OnInit {
   allOrders:IOrder[]; 
   orderDetailsList:IOrderProduct[]; 
+  hasOrders:boolean = false;
   constructor(private _orderAppSeriv:OrderService, private authenticationService: AuthenticationService) { }
   pageSize:number=3;
   currentPageNumber:number=1
@@ -39,6 +40,10 @@ export class OrderComponent implements OnInit {
       data => {
         this.allOrders = data
         this.currentPageNumber = currentPageNumber;
+        if(data.length != 0)
+          this.hasOrders = true;
+        else
+          this.hasOrders = false;
       },
       error=>
       {
