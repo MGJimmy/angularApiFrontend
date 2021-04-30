@@ -54,10 +54,10 @@ export class ProductsComponent implements OnInit {
     ) 
     
     this.productForm = this._formBuilder.group({
-      name:['', Validators.required],
-      price:['', Validators.required],
-      description:[''],
-      discount:['', Validators.required],
+      name:['', [Validators.required,Validators.minLength(5)]],
+      price:['', [Validators.required,Validators.min(1)]],
+      description:['',[Validators.required,Validators.minLength(10)]],
+      discount:['', [Validators.required,Validators.min(5)]],
       quantity:['', Validators.required],
       categoryId:['', Validators.required],
       colorId:['', Validators.required],

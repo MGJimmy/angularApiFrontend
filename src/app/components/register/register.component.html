@@ -47,7 +47,7 @@
                         </option>
                     </select>
                     <div *ngIf="formFields.gender.touched && (formFields.gender.value === 'Select Gender' || formFields.gender.value === '') ">
-                        <small class="text-danger" *ngIf="formFields.gender.value === '' || formFields.gender.value === 'Select Gender' || formFields.gender.errors.required ">This Field is required</small>
+                        <small class="text-danger" *ngIf="formFields.gender.value === '' || formFields.gender.value === 'Select Gender' || formFields.gender.errors.required ">gender is required</small>
                     </div>
                 </div>
                 <button [disabled]="loading" class="btn btn-primary">
