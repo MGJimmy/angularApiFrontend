@@ -19,12 +19,12 @@
                 <tr data-id=" value.id ">
                     <td scope="row" class="image"><img class="w-100" [src]="createImgPath(productCart.productImage)"></td>
                     <td class="align-middle">{{productCart.productName}}</td>
-                    <td class="cartItemPrice align-middle">{{productCart.productPrice}}</td>
+                    <td class="cartItemPrice align-middle">{{productCart.productPrice | currency}}</td>
                     <td class="align-middle">
                         <input (change)="quantityChanged(productQuantity.value,productCart.productId)" type="number" #productQuantity class="itemQuantity" value="1" min="1" max={{productCart.productQuantity}} onkeydown="return false">
                     </td>
-                    <td class="itemTotPriceDiv align-middle">{{computeTotalProductPrice(productCart.productId)}}</td>
-                    <td class="itemTotPriceDiv align-middle">{{computeTotalProductPriceAfterDiscount(productCart.productId)}}</td>
+                    <td class="itemTotPriceDiv align-middle">{{computeTotalProductPrice(productCart.productId) | currency}}</td>
+                    <td class="itemTotPriceDiv align-middle">{{computeTotalProductPriceAfterDiscount(productCart.productId) | currency}}</td>
                     <td id="deleteItem" class="align-middle deleteItem" ><i (click)="deleteProductFromCart(productCart.productId)" class="fas fa-trash-alt"></i></td>
                 </tr>
             </tbody>

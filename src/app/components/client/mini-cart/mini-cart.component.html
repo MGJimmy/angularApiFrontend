@@ -1,4 +1,4 @@
-<div class="container">
+<div>
     <div class="mini-cart">
         <div class="mini-cart-header">
             <i class="fas fa-shopping-cart mx-1"></i><span class="badge">{{productsCart.length}}</span>
@@ -8,12 +8,11 @@
             </div>
         </div>
         <!--end mini-cart-header -->
-
         <ul class="mini-cart-items pl-0">
             <li class="clearfix" *ngFor="let productCart of productsCart;let i=index">
                 <img class="pt-2" style="width: 100px;height: 100px;" [src]="createImgPath(productCart.productImage)" alt="item1" />
                 <span class="item-name">{{productCart.productName}}</span>
-                <span class="item-price">{{productCart.productPrice}}</span>
+                <span class="item-price">{{productCart.productPrice | currency}}</span>
                 <!-- <span class="item-quantity">(x 1)</span> -->
             </li>
         </ul>

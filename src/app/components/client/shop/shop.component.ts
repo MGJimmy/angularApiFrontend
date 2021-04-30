@@ -9,6 +9,7 @@ import { CartService } from 'src/app/_services/cart.service';
 import { CategoryService } from 'src/app/_services/category.service';
 import { ColorService } from 'src/app/_services/color.service';
 import { ProductService } from 'src/app/_services/product.service';
+import { SharedService } from 'src/app/_services/shared.service';
 import { WishlistService } from 'src/app/_services/wishlist.service';
 import { environment } from 'src/environments/environment';
 
@@ -41,7 +42,8 @@ export class ShopComponent implements OnInit {
     private _wishlistService: WishlistService,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _authenticationService: AuthenticationService) {
+    private _authenticationService: AuthenticationService,
+    private _sharedService:SharedService) {
 
     this._route.queryParams
       .subscribe(params => {
@@ -133,7 +135,8 @@ export class ShopComponent implements OnInit {
     if (this._authenticationService.isLoggedIn()) {
       this._cartService.addProductToCart(productId).subscribe(
         data => {
-          alert("added to cart")
+          alert("added to cart");
+          this._sharedService.sendClickEvent();
         },
         error => {
           alert(error);

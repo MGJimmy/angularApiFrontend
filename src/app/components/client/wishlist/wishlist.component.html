@@ -16,7 +16,7 @@
                 <tr data-id="value.id ">
                     <td scope="row" class="image"><img class="w-100" [src]="createImgPath(product.image)"></td>
                     <td class="align-middle">{{product.name}}</td>
-                    <td class="cartItemPrice align-middle font-weight-bold">{{product.price}}</td>
+                    <td class="cartItemPrice align-middle font-weight-bold">{{product.price | currency}}</td>
                     <td class="itemTotPriceDiv align-middle">
                         <button  (click)="addProductToCart(product.id)" type="button" class="addToChart btn btn-primary my-3 mr-3" data-id="value.id "><i class="fa fa-cart-plus"></i> Add to Cart</button>
                     </td>

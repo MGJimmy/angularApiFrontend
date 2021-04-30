@@ -41,7 +41,7 @@
 </nav>
 <div class="row" *ngIf="!hasColors">
     <div class="text-center alert alert-danger col-9 mx-auto">
-        There's no orders to show
+        There's no colors to show
     </div>
 </div>
 <!-- Modal -->
@@ -66,7 +66,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" #addOrUpdateModelCloseBtn>Close</button>
-                    <button type="submit" class="btn btn-primary" [disabled]="loading" (click)="onAddOrUpdateSubmit()"> {{actionName}} </button>
+                    <button type="submit" class="btn btn-primary" [disabled]="colorForm.invalid || loading" (click)="onAddOrUpdateSubmit()"> {{actionName}} </button>
                 </div>
             </form>
         </div>

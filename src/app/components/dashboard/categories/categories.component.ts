@@ -33,7 +33,7 @@ export class CategoriesComponent implements OnInit {
   get formFields() { return this.categoryForm.controls; }
   constructor(private _categoryService:CategoryService,
     private _formBuilder: FormBuilder,
-    private _router:Router) { }
+    private _router:Router,) { }
 
   ngOnInit(): void {
     this.getCategoriesCount();

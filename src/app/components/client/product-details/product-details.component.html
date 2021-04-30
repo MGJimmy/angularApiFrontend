@@ -55,9 +55,9 @@
                     <small *ngIf="userName?.errors?.required" class="text-danger">user name is required</small>
                     <small *ngIf="userName?.errors?.pattern" class="text-danger">user name must be character only</small>
                 </div> -->
-            <button type="submit" class="btn btn-primary my-3 px-5" [disabled]="loading"
+            <button type="submit" class="btn btn-success my-3 px-3 mr-3" [disabled]="loading"
             (click)="updateReview()">Update</button>
-            <button type="submit" class="btn btn-primary my-3 px-5"
+            <button type="submit" class="btn btn-danger my-3 px-3"
             (click)="cancelUpdateReviewForm()">Cancel</button>
           </div>
       </form>

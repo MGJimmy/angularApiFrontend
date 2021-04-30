@@ -13,7 +13,7 @@ export class ClientHeaderComponent implements OnInit {
   isLoggedIn:boolean = false;
   showMiniCart : boolean = false;
   constructor(private _router:Router, 
-    private _authenticationService:AuthenticationService ) { }
+    private _authenticationService:AuthenticationService) { }
 
   ngOnInit(): void {
   }
