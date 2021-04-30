@@ -9,12 +9,12 @@
         </div>
         <!--end mini-cart-header -->
 
-        <ul class="mini-cart-items pl-0">
+        <ul class="mini-cart-items pl-0" *ngFor="let productCart of productsCart;let i=index">
             <li class="clearfix">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
-                <span class="item-name">Sony DSC-RX100M III</span>
-                <span class="item-price">$849.99</span>
-                <span class="item-quantity">(x 1)</span>
+                <img [src]="productCart.productImage" alt="item1" />
+                <span class="item-name">{{productCart.productName}}</span>
+                <span class="item-price">{{productCart.productPrice}}</span>
+                <!-- <span class="item-quantity">(x 1)</span> -->
             </li>
         </ul>
 

@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { UserRoles } from 'src/app/_models/_enums/UserRoles';
 import { IUser } from 'src/app/_models/_interfaces/IUser';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { RegisterService } from 'src/app/_services/register.service';
 import { ConfirmModalComponent } from '../../_reusableComponents/confirm-modal/confirm-modal.component';
 
@@ -18,6 +20,7 @@ export class UsersComponent implements OnInit {
   private _UserToUpdate:IUser;
   error = '';
   genderList = ["male", "female"]
+  roles: string[] = Object.values(UserRoles);
   allUsers:IUser[]; 
   errorMsg:string;
   // userForm : FormGroup;
@@ -32,7 +35,8 @@ export class UsersComponent implements OnInit {
     private formBuilder: FormBuilder,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _registerService: RegisterService
+    private _registerService: RegisterService ,
+    private _authenticationService : AuthenticationService
     ) { }
 
   ngOnInit(): void {
@@ -43,7 +47,8 @@ export class UsersComponent implements OnInit {
       email: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      gender: ['', Validators.required]
+      gender: ['', Validators.required],
+      role: ['', Validators.required]
     });
 
     this._registerService.getAccountsCount().subscribe(
@@ -79,19 +84,37 @@ export class UsersComponent implements OnInit {
       lastName: this.formFields.lastName.value,
       gender: this.formFields.gender.value
     }
-    this._registerService.addNewAdmin(newUser)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this._router.routeReuseStrategy.shouldReuseRoute = () => false;
-          this._router.onSameUrlNavigation = 'reload';
-          this.addOrUpdateModelCloseBtn.nativeElement.click();
-          this._router.navigate([this._router.url]);
-        },
-        error => {
-          this.error = error;
-          this.loading = false;
-        });
+    if(this.formFields.role.value == UserRoles.Admin)
+    {
+      this._registerService.addNewAdmin(newUser)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this._router.routeReuseStrategy.shouldReuseRoute = () => false;
+            this._router.onSameUrlNavigation = 'reload';
+            this.addOrUpdateModelCloseBtn.nativeElement.click();
+            this._router.navigate([this._router.url]);
+          },
+          error => {
+            this.error = error;
+            this.loading = false;
+          });
+      }
+      else if(this.formFields.role.value == UserRoles.User){
+        this._registerService.addNewUser(newUser)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this._router.routeReuseStrategy.shouldReuseRoute = () => false;
+            this._router.onSameUrlNavigation = 'reload';
+            this.addOrUpdateModelCloseBtn.nativeElement.click();
+            this._router.navigate([this._router.url]);
+          },
+          error => {
+            this.error = error;
+            this.loading = false;
+          });
+      }
   }
 
   private onUpdateUserSubmit(){
@@ -152,7 +175,9 @@ export class UsersComponent implements OnInit {
                   email:data.email,
                   firstName:data.firstName,
                   lastName:data.lastName,
-                  gender:data. gender
+                  gender:data.gender,
+                  //role:data.role
+                  role:UserRoles.User
                 }); 
                 this._UserToUpdate = data;
             },
