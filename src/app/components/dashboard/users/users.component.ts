@@ -160,6 +160,16 @@ export class UsersComponent implements OnInit {
   }
 
   openAddUserModal(){
+    this.registerForm.setValue({
+      username:"",
+      password:"",
+      email:"",
+      firstName:"",
+      lastName:"",
+      gender:"Select Gender",
+      //role:data.role
+      role:"Select Role"
+    }); 
     this.actionName = "Add";
   }
 

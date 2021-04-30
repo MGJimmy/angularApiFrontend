@@ -17,7 +17,7 @@
             <tbody id="cartBody" *ngFor="let productCart of productsCart;let i=index">
                 <!-- foreach  cartproduct -->
                 <tr data-id=" value.id ">
-                    <td scope="row" class="image"><img class="w-100" [src]="productCart.productImage"></td>
+                    <td scope="row" class="image"><img class="w-100" [src]="createImgPath(productCart.productImage)"></td>
                     <td class="align-middle">{{productCart.productName}}</td>
                     <td class="cartItemPrice align-middle">{{productCart.productPrice}}</td>
                     <td class="align-middle">

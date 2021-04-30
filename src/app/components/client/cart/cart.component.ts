@@ -5,6 +5,7 @@ import { IProduct } from 'src/app/_models/_interfaces/IProduct';
 import { IProductCartDetails } from 'src/app/_models/_interfaces/IProductCartDetails';
 import { IProductCartVM } from 'src/app/_models/_interfaces/IProductCartVM';
 import { CartService } from 'src/app/_services/cart.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cart',
@@ -84,6 +85,8 @@ export class CartComponent implements OnInit {
                
             });
   }
-
+  public createImgPath = (serverPath: string) => {
+    return `${environment.apiUrl}/${serverPath}`;
+  }
 
 }

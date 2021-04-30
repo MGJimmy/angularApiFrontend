@@ -23,7 +23,7 @@ export class ProductsComponent implements OnInit {
   hasProducts:boolean = false;
   private _ProductToUpdate:IProduct;
   allProducts:IProductVM[];
-  allcColors:IColor[];
+  allColors:IColor[];
   allCategories:ICategory[];
   errorMsg:string;
   productForm : FormGroup;
@@ -79,7 +79,7 @@ export class ProductsComponent implements OnInit {
   //get all colors
   this._colorService.getAllColors().subscribe(
     data => {
-      this.allcColors = data
+      this.allColors = data
    
     },
     error=>
@@ -171,6 +171,15 @@ export class ProductsComponent implements OnInit {
  
   openAddProductModal(){
     this.actionName = "Add";
+    this.productForm.setValue({
+      name: "",
+      price:"",
+      description:"",
+      discount:"",
+      quantity:"",
+      categoryId:"Select Category",
+      colorId:"Select Color"
+    }); 
   }
 
   openUpdateProductModal(ProductId){

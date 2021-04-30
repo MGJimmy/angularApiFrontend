@@ -1,25 +1,24 @@
 <div class="container">
     <div class="mini-cart">
         <div class="mini-cart-header">
-            <i class="fas fa-shopping-cart mx-1"></i><span class="badge">3</span>
+            <i class="fas fa-shopping-cart mx-1"></i><span class="badge">{{productsCart.length}}</span>
             <div class="mini-cart-total">
-                <span class="lighter-text">Total:</span>
-                <span class="main-color-text">$2,229.97</span>
+                <!-- <span class="lighter-text">Total:</span>
+                <span class="main-color-text">$2,229.97</span> -->
             </div>
         </div>
         <!--end mini-cart-header -->
 
-        <ul class="mini-cart-items pl-0" *ngFor="let productCart of productsCart;let i=index">
-            <li class="clearfix">
-                <img [src]="productCart.productImage" alt="item1" />
+        <ul class="mini-cart-items pl-0">
+            <li class="clearfix" *ngFor="let productCart of productsCart;let i=index">
+                <img class="pt-2" style="width: 100px;height: 100px;" [src]="createImgPath(productCart.productImage)" alt="item1" />
                 <span class="item-name">{{productCart.productName}}</span>
                 <span class="item-price">{{productCart.productPrice}}</span>
                 <!-- <span class="item-quantity">(x 1)</span> -->
             </li>
         </ul>
-
-        <a href="#" class="btn btn-info d-block mb-3">View Cart</a>
-        <a href="#" class="btn btn-primary d-block">Checkout</a>
+        <a routerLink="/cart" class="btn btn-info d-block mb-3">View Cart</a>
+        <!-- <a href="#" class="btn btn-primary d-block">Checkout</a> -->
     </div>
     <!--end mini-cart -->
 </div>

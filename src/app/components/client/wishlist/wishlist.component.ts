@@ -4,6 +4,7 @@ import { IProduct } from 'src/app/_models/_interfaces/IProduct';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CartService } from 'src/app/_services/cart.service';
 import { WishlistService } from 'src/app/_services/wishlist.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-wishlist',
@@ -52,6 +53,10 @@ export class WishlistComponent implements OnInit {
       }
     )
 
+  }
+
+  public createImgPath = (serverPath: string) => {
+    return `${environment.apiUrl}/${serverPath}`;
   }
 
 }

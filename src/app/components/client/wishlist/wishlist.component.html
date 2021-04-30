@@ -14,7 +14,7 @@
             <tbody id="wishListBody" *ngFor="let product of products">
                 <!-- foreach ProductWishlist -->
                 <tr data-id="value.id ">
-                    <td scope="row" class="image"><img class="w-100" [src]="product.image"></td>
+                    <td scope="row" class="image"><img class="w-100" [src]="createImgPath(product.image)"></td>
                     <td class="align-middle">{{product.name}}</td>
                     <td class="cartItemPrice align-middle font-weight-bold">{{product.price}}</td>
                     <td class="itemTotPriceDiv align-middle">

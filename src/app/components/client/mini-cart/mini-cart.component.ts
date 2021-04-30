@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { IProductCartVM } from 'src/app/_models/_interfaces/IProductCartVM';
 import { CartService } from 'src/app/_services/cart.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-mini-cart',
@@ -27,6 +28,10 @@ export class MiniCartComponent implements OnInit {
         },
         error => {
         });
+  }
+
+  public createImgPath = (serverPath: string) => {
+    return `${environment.apiUrl}/${serverPath}`;
   }
 
 }
