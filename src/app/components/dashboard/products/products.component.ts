@@ -20,6 +20,7 @@ import { ConfirmModalComponent } from '../../_reusableComponents/confirm-modal/c
 export class ProductsComponent implements OnInit {
   @ViewChild('addOrUpdateModelCloseBtn') addOrUpdateModelCloseBtn;
   @ViewChild(ConfirmModalComponent) confirmModal:ConfirmModalComponent;
+  hasProducts:boolean = false;
   private _ProductToUpdate:IProduct;
   allProducts:IProductVM[];
   allcColors:IColor[];
@@ -54,10 +55,10 @@ export class ProductsComponent implements OnInit {
     ) 
     
     this.productForm = this._formBuilder.group({
-      name:['', Validators.required],
-      price:['', Validators.required],
-      description:[''],
-      discount:['', Validators.required],
+      name:['', [Validators.required,Validators.minLength(5)]],
+      price:['', [Validators.required,Validators.min(1)]],
+      description:['',[Validators.required,Validators.minLength(10)]],
+      discount:['', [Validators.required,Validators.min(5)]],
       quantity:['', Validators.required],
       categoryId:['', Validators.required],
       colorId:['', Validators.required],
@@ -213,13 +214,18 @@ export class ProductsComponent implements OnInit {
       data => {
         this.allProducts = data
         this.currentPageNumber = currentPageNumber;
+        if(data.length != 0)
+          this.hasProducts = true;
+        else
+          this.hasProducts = false;
+
       },
       error=>
       {
        this.errorMsg = error;
       }
     ) 
-  }4
+  }
   public uploadFinished = (event) => { 
     this.response = event;
   }

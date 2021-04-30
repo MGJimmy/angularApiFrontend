@@ -71,5 +71,19 @@ export class CartComponent implements OnInit {
     this._router.navigate(['/checkout']);
 
   }
+  deleteProductFromCart(prodID:number){
+    this._cartService.deleteProductFromCart(prodID)
+        .pipe(first())
+        .subscribe(
+            data => {
+              //after delete from database delete from array to uptate cart view
+               let deletedProd= this.productsCart.find(pc=>pc.productId == prodID);
+               this.productsCart.splice(this.productsCart.indexOf(deletedProd),1);
+            },
+            error => {
+               
+            });
+  }
+
 
 }

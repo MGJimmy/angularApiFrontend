@@ -18,11 +18,12 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent implements OnInit {
+  hasProducts:boolean = false;
   errorMsg: string;
   allCategories: ICategory[];
   allColors: IColor[];
   productsPerPage: IProductVM[];
-  pageSize: number = 2;
+  pageSize: number = 9;
   productsCount: number;
   currentPageNumber: number = 1;
   numberOfPages: number; // categoriesCount / pageSize
@@ -47,7 +48,9 @@ export class ShopComponent implements OnInit {
         // Defaults to 0 if no query param provided.
         //this.selectedCategoryId = this.selectedColorId = 0
         this.selectedCategoryId = params['categoryId'] || 0;
+        this.selectedCategoryName = params['categoryName'] || this.selectedCategoryName;
         this.selectedColorId = params['colorId'] || 0;
+        this.selectedColorName = params['colorName'] || this.selectedColorName;
         this.changePagetTitle();
         this.getSelectedPage(1);
 
@@ -80,6 +83,10 @@ export class ShopComponent implements OnInit {
         this.productsPerPage = data
         this.getProductsCount(this.selectedCategoryId);
         this.currentPageNumber = currentPageNumber;
+        if(data.length != 0)
+          this.hasProducts = true;
+        else
+          this.hasProducts = false;
       },
       error => {
         this.errorMsg = error
@@ -93,6 +100,10 @@ export class ShopComponent implements OnInit {
         console.log(data)
         this.getProductsCount(0, this.selectedColorId);
         this.currentPageNumber = currentPageNumber;
+        if(data.length != 0)
+          this.hasProducts = true;
+        else
+          this.hasProducts = false;
       },
       error => {
         this.errorMsg = error
@@ -106,6 +117,10 @@ export class ShopComponent implements OnInit {
         this.productsPerPage = data
         this.currentPageNumber = currentPageNumber;
         this.getProductsCount();
+        if(data.length != 0)
+          this.hasProducts = true;
+        else
+          this.hasProducts = false;
 
       },
       error => {

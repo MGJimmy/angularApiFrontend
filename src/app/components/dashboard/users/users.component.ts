@@ -16,6 +16,7 @@ import { ConfirmModalComponent } from '../../_reusableComponents/confirm-modal/c
 export class UsersComponent implements OnInit {
   @ViewChild('addOrUpdateModelCloseBtn') addOrUpdateModelCloseBtn;
   @ViewChild(ConfirmModalComponent) confirmModal:ConfirmModalComponent;
+  hasUsers:boolean = false;
   registerForm: FormGroup;
   private _UserToUpdate:IUser;
   error = '';
@@ -204,6 +205,7 @@ export class UsersComponent implements OnInit {
       data => {
         this.allUsers = data
         this.currentPageNumber = currentPageNumber;
+        this.hasUsers = (data.length != 0) ? true : false;
       },
       error=>
       {

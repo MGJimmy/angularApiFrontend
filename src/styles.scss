@@ -8,6 +8,10 @@
   padding-left: 2.5rem;
   padding-right: 2.5rem;
 }
+.dashboardImgWrapper{
+  max-width: 12.5rem;
+  margin: 0 auto;
+}
 a, button {cursor: pointer;}
 .cursorNotAllowed{cursor: not-allowed;}
 .cursorPointer{cursor: pointer;}
@@ -80,6 +84,8 @@ i {cursor: pointer;}
     margin-left: 10px;
     margin-right: 10px;
   }
+  //product
+  .productImgWrapper{height: 16rem;}
 }
 
 // Media query

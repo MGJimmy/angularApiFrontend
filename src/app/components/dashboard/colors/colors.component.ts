@@ -15,6 +15,7 @@ import { ConfirmModalComponent } from '../../_reusableComponents/confirm-modal/c
 export class ColorsComponent implements OnInit {
   @ViewChild('addOrUpdateModelCloseBtn') addOrUpdateModelCloseBtn;
   @ViewChild(ConfirmModalComponent) confirmModal:ConfirmModalComponent;
+  hasColors:boolean = false;
   private _colorToUpdate:IColor;
   allColors:IColor[]; 
   errorMsg:string;
@@ -34,6 +35,13 @@ export class ColorsComponent implements OnInit {
     private _router:Router) { }
 
   ngOnInit(): void {
+    this.getColorsCount();
+    this.colorForm = this._formBuilder.group({
+      name:['', Validators.required]
+    });
+    this.getSelectedPage(1);
+  }
+  private getColorsCount(){
     this._colorService.getColorsCount().subscribe(
       data => {
         this.colorsCount = data
@@ -44,13 +52,7 @@ export class ColorsComponent implements OnInit {
        this.errorMsg = error;
       }
     ) 
-    
-    this.colorForm = this._formBuilder.group({
-      name:['', Validators.required]
-    });
-    this.getSelectedPage(1);
   }
-
   private onAddColorSubmit() {
     this.submitted = true;
 
@@ -151,6 +153,11 @@ export class ColorsComponent implements OnInit {
       data => {
         this.allColors = data
         this.currentPageNumber = currentPageNumber;
+        if(data.length != 0)
+          this.hasColors = true;
+        else
+          this.hasColors = false;
+
       },
       error=>
       {

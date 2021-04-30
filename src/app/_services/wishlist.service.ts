@@ -27,8 +27,8 @@ export class WishlistService {
       }));
   }
 
-  deleteProductFromWishlist(wishlistID: number){
-    let url = `${environment.apiUrl}/api/wishlist/${wishlistID}`;
+  deleteProductFromWishlist(prodID: number){
+    let url = `${environment.apiUrl}/api/wishlist/${prodID}`;
     return this._http.delete<any>(url).pipe(catchError((err)=>
     {
       return throwError(err.message ||"Internal Server error contact site adminstarator");
