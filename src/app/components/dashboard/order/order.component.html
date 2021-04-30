@@ -1,5 +1,5 @@
 <h2 class="text-center display-4 font-weight-bold my-5">Orders</h2>
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover" *ngIf="hasOrders">
     <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
@@ -23,7 +23,7 @@
     </tbody>
 </table>
 <!-- pagination -->
-<nav aria-label="..." class="">
+<nav aria-label="..." class="" *ngIf="hasOrders">
     <div class="d-inline-block">
         <ul class="pagination">
             <li class="page-item" [ngClass]="{disabled:currentPageNumber <=1, cursorNotAllowed:currentPageNumber <=1}" >
@@ -40,7 +40,12 @@
     </div>
     <div class="float-right h5 mr-4 text-secondary">Showing {{currentPageNumber}} of {{numberOfPages}}</div>
 </nav>
-
+<!-- no items to show -->
+<div class="row" *ngIf="!hasOrders">
+    <div class="text-center alert alert-danger col-9 mx-auto">
+        There's no orders to show
+    </div>
+</div>
 
 <!-- Modal -->
 <div  class="modal fade" id="orderDetailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

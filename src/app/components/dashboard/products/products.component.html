@@ -4,7 +4,7 @@
     (click)="openAddProductModal()">
     New
 </button>
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover" *ngIf="hasProducts">
     <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
@@ -27,7 +27,9 @@
             <td>{{ product.description }}</td>
             <td>{{ product.discount }}%</td>
             <td>
-                <img class="img-thumbnail img-fluid" [src]="createImgPath(product.image)" alt="category image">
+                <div class="dashboardImgWrapper">
+                    <img class="img-thumbnail img-fluid w-100" [src]="createImgPath(product.image)" alt="category image">
+                </div>
             </td>
             <td>{{ product.quantity }}</td>
             <td>{{ product.categoryName }}</td>
@@ -42,7 +44,7 @@
     </tbody>
 </table>
 <!-- pagination -->
-<nav aria-label="...">
+<nav aria-label="..." *ngIf="hasProducts">
     <div class="d-inline-block">
         <ul class="pagination">
             <li class="page-item" [ngClass]="{disabled:currentPageNumber <=1, cursorNotAllowed:currentPageNumber <=1}">
@@ -62,6 +64,12 @@
     </div>
     <div class="float-right h5 mr-4 text-secondary">Showing {{currentPageNumber}} of {{numberOfPages}}</div>
 </nav>
+<!-- no items to show alert -->
+<div class="row" *ngIf="!hasProducts">
+    <div class="text-center alert alert-danger col-9 mx-auto">
+        There's no orders to show
+    </div>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="addAndUpdateModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">

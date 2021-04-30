@@ -1,10 +1,10 @@
-<section id="searchPage">
+<section id="searchPage" class="my-5 py-5">
   <div class="container">
     <h2 class="cartName text-center display-3 my-5">Search results for: {{searchKey}}</h2>
-    <div class="row productsContainer" id="searchResultsContainer">
-      <div class="col-md-4 box mb-4" *ngFor="let product of searchedProducts">
+    <div class="row productsContainer products" id="searchResultsContainer" *ngIf="foundProducts">
+      <div class="col-md-4 box mb-4 " *ngFor="let product of searchedProducts">
 
-        <div class="image position-relative overflow-hidden">
+        <div class="image position-relative overflow-hidden productImgWrapper">
           <a routerLink="/product-details/{{ product.id }}">
             <img class="w-100" [src]="createImgPath(product.image)" alt="img1">
             <img class="top w-100 position-absolute" [src]="createImgPath(product.image)" alt="img1">
@@ -33,7 +33,7 @@
       <!-- End the foreach -->
     </div>
     <!-- start if there's no result -->
-    <div id="noResults">
+    <div id="noResults" *ngIf="!foundProducts">
       <div class="alert alert-danger" role="alert">Sorry no match results</div>
     </div>
     <!-- End if there's no result -->

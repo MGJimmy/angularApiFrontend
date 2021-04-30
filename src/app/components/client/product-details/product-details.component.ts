@@ -136,28 +136,38 @@ export class ProductDetailsComponent implements OnInit {
   }
   // dealing with cart
   addProductToCart(productId: number) {
-    this._cartService.addProductToCart(productId).subscribe(
-      data => {
-        alert("added to cart")
-      },
-      error => {
-        alert("Login to add product to cart");
-        this._router.navigate(['/login']);
-      }
-    )
+    if (this._authenticationService.isLoggedIn()) {
+      this._cartService.addProductToCart(productId).subscribe(
+        data => {
+          alert("added to cart")
+        },
+        error => {
+          alert(error);
+        }
+      )
+    }
+    else {
+      alert("Login to add product to cart");
+      this._router.navigate(['/login'])
+    }
   }
   addProductToWishlist(productId) {
-    this._wishlistService.addProductToWishlist(productId).subscribe(
-      data => {
-        alert("added to wishlist")
-      },
-      error => {
-        alert("Login to add product to wishlist");
-        this._router.navigate(['/login']);
-      }
-    )
+    if(this._authenticationService.isLoggedIn())
+    {
+      this._wishlistService.addProductToWishlist(productId).subscribe(
+        data => {
+          alert("added to wishlist")
+        },
+        error => {
+          alert(error);
+        }
+      )
+    }
+    else {
+      alert("Login to add product to wishlist");
+      this._router.navigate(['/login']);
+    }
   }
-
   // reviews
   openUpdateReviewForm() {
     this.needUpdate = true;

@@ -49,14 +49,13 @@
 
 .sections .overlay {
   position: inherit;
-  background-color: rgb(0, 0, 0, 0.2);
+  background-color: rgb(0, 0, 0, 0.3);
   z-index: 2;
-  opacity: 0;
 }
 
 .sections .content {
   z-index: 2; 
-  color: #555;
+  color: #fff;
   top: 60px;
   left: 35px;
   
@@ -64,15 +63,15 @@
 .sections .categoryWrapper {height: 18.75rem;}
 .sections .content p {font-size: 25px;}
 .sections .content a {
-  color: #555;
+  color: #fff;
   font-size: 20px;
   border-bottom: 2px solid;
 }
-.sections .content a:hover {color: #b48619;}
+.sections .content a:hover {color: #f0b222;}
 
-.sections .row > div:hover .bg_image {transform: translateX(15%);}
+// .sections .row > div:hover .bg_image {transform: translateX(15%);}
 
-.sections .row > div:hover  .overlay {opacity: 1;}
+.sections .row > div:hover  .overlay { background-color: rgb(0, 0, 0, 0.5);}
 /********** End sections  *****************/
 
 /*------------ Start testimonials -------------*/

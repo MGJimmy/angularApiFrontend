@@ -3,7 +3,7 @@
 <button class="btn btn-primary mb-2 dBAddNewBtn" data-toggle="modal" data-target="#addAndUpdateModel" (click)="openAddColorModal();">
   New
 </button>
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover" *ngIf="hasColors">
     <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
@@ -23,7 +23,7 @@
     </tbody>
 </table>
 <!-- pagination -->
-<nav aria-label="..." class="">
+<nav aria-label="..." class="" *ngIf="hasColors">
     <div class="d-inline-block">
         <ul class="pagination">
             <li class="page-item" [ngClass]="{disabled:currentPageNumber <=1, cursorNotAllowed:currentPageNumber <=1}">
@@ -39,6 +39,11 @@
     </div>
     <div class="float-right h5 mr-4 text-secondary">Showing {{currentPageNumber}} of {{numberOfPages}}</div>
 </nav>
+<div class="row" *ngIf="!hasColors">
+    <div class="text-center alert alert-danger col-9 mx-auto">
+        There's no orders to show
+    </div>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="addAndUpdateModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

@@ -3,7 +3,7 @@
 <button class="btn btn-primary mb-2 dBAddNewBtn" data-toggle="modal" data-target="#addAndUpdateModel" (click)="openAddCategoryModal();">
   New
 </button>
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover" *ngIf="hasCategories">
     <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
@@ -16,8 +16,10 @@
         <tr *ngFor="let cat of allCategories;let i=index">
             <th scope="row">{{i+(pageSize*(currentPageNumber-1))+1}}</th>
             <td>{{ cat.name }}</td>
-            <td style="height: 40px;">
-                <img class="img-thumbnail img-fluid" [src]="createImgPath(cat.image)" alt="category image">
+            <td>
+                <div class="dashboardImgWrapper">
+                    <img class="img-thumbnail img-fluid w-100" [src]="createImgPath(cat.image)" alt="category image">
+                </div>
             </td>
             <td>
                 <button class="btn btn-success mx-2" data-toggle="modal" data-target="#addAndUpdateModel" (click)="openUpdateCategoryModal(cat.id)">Update</button>
@@ -27,7 +29,7 @@
     </tbody>
 </table>
 <!-- pagination -->
-<nav aria-label="..." class="">
+<nav aria-label="..." class="" *ngIf="hasCategories">
     <div class="d-inline-block">
         <ul class="pagination">
             <li class="page-item" [ngClass]="{disabled:currentPageNumber <=1, cursorNotAllowed:currentPageNumber <=1}">
@@ -43,6 +45,12 @@
     </div>
     <div class="float-right h5 mr-4 text-secondary">Showing {{currentPageNumber}} of {{numberOfPages}}</div>
 </nav>
+
+<div class="row" *ngIf="!hasCategories">
+    <div class="text-center alert alert-danger col-9 mx-auto">
+        There's no categories to show
+    </div>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="addAndUpdateModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -71,26 +79,5 @@
         </div>
     </div>
 </div>
-
-
-<!-- <div class="modal fade" id="deleteModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Delete category</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Are you sure to delete</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" #deleteModelCloseBtn>Close</button>
-                <button type="submit" class="btn btn-primary" [disabled]="loading" (click)="deleteCategory()"> Confirm </button>
-            </div>
-        </div>
-    </div>
-</div> -->
 
 <app-confirm-modal></app-confirm-modal>
